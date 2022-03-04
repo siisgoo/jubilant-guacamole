@@ -1,0 +1,35 @@
+{
+    "dependencies": {
+        "@types/lodash": "^4.14.179",
+        "date-and-time": "^2.2.1",
+        "puppeteer": "^13.4.1"
+    },
+    "name": "jubilant-guacamole",
+    "version": "1.0.0",
+    "description": "barbars.ru bot",
+    "main": "main.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "tsc -b",
+        "postbuild": "cp -Ru node_modules bin/node_modules",
+        "debug": "node --inspect bin/main.js",
+        "go": "node bin/main.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/siisgoo/jubilant-guacamole.git"
+    },
+    "keywords": [
+        "bot",
+        "barbars"
+    ],
+    "author": "siisgoo",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/siisgoo/jubilant-guacamole/issues"
+    },
+    "homepage": "https://github.com/siisgoo/jubilant-guacamole#readme",
+    "devDependencies": {
+        "@tsconfig/esm": "^1.0.0"
+    }
+}

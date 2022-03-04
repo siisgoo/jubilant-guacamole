@@ -1,0 +1,57 @@
+{
+    "accounts": [
+        {
+            "auth": {
+                "login": "siisgoo",
+                "password": "filso78gpk"
+            },
+
+            "session": {
+                "sessionTime": 3600000,
+                "sessionResumeTime": 1800000
+            },
+
+            "items": {
+                "useBottle": true,
+
+                "breakItems": true,
+                "breakLevel": 5,
+                "breakRarity": "rare"
+            },
+
+            "farm": {
+                "objective": "Towers",
+                "settings":  "Hero"
+            }
+        }
+    ],
+
+    "config": {
+        "puppeteer": {
+            "Chromium": "/usr/bin/chromium",
+            "headless": false
+        },
+
+        "useBottleGlobal": true,
+        "breakGlobal": false,
+        "log_level": "Trace",
+        "log_file": "./log"
+    },
+
+    "url": {
+        "main_menu": "https://barbars.ru/",
+        "login": "https://barbars.ru/login",
+        "hero": {
+            "main": "http://barbars.ru/user",
+            "equipment": "http://barbars.ru/user/body/id/",
+            "rack": "http://barbars.ru/user/rack",
+            "store": "http://barbars.ru/user/store"
+        },
+
+        "fight": {
+            "towers": "http://barbars.ru/game/towers",
+            "ogreDungeon": "http://barbars.ru/game/ogreDungeon",
+            "duel": "http://barbars.ru/game/duel"
+        }
+    }
+}
