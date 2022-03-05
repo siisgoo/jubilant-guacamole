@@ -5,8 +5,6 @@ import { EventEmitter } from 'events';
 import { HeroBot, BotItemsSettings } from './bot.js';
 import { logMessage, LoggingLevel, sleep } from './utils.js';
 
-import { url } from "./config.json";
-
 // ░█▀▀░█▀█░█▀▄░█▄█░░░█▀▀░▀█▀░█▀▄░█▀█░▀█▀░█▀▀░█▀▀░█░█
 // ░█▀▀░█▀█░█▀▄░█░█░░░▀▀█░░█░░█▀▄░█▀█░░█░░█▀▀░█░█░░█░
 // ░▀░░░▀░▀░▀░▀░▀░▀░░░▀▀▀░░▀░░▀░▀░▀░▀░░▀░░▀▀▀░▀▀▀░░▀░
@@ -23,6 +21,7 @@ export interface StrategyCallback { (bot: HeroBot): Promise<void> };
 export interface FarmStrategy extends EventEmitter {
     execute(farmSettings: FarmSettings, itemSettings: BotItemsSettings);
     Initialize(bot: HeroBot);
+    get callback(): StrategyCallback;
 };
 
 export let Strategies = new Map<AvalibleStrategy_t, FarmStrategy>([

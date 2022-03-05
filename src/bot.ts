@@ -1,7 +1,7 @@
 import * as puppeteer from 'puppeteer'
 import { Item, ItemManager, Rarity } from './items.js';
 import { logMessage, LoggingLevel, randomizeSleep, sleep } from './utils.js';
-import { ResourceManager } from './resourcesManager.js';
+import { ResourceManager } from './resources.js';
 import * as Farm  from './farm.js';
 import { EventEmitter } from 'events';
 
@@ -46,8 +46,8 @@ export interface BotSettings {
 };
 
 const DefaulBotSettings: BotSettings = {
-    stepInterval:      1000,
-    randomize:         500,
+    stepInterval:      500,
+    randomize:         1500,
 
     // use it split?
     auth: {
@@ -83,13 +83,11 @@ export class HeroBot extends EventEmitter {
     private running:   boolean;
     private inited:    boolean;
     private settings:  BotSettings;
-    private abilities: Ability[];
 
     private conflictSide: ConflictSide;
     private heroClass:    HeroClass;
 
     private resources:    ResourceManager;
-    private items:        ItemManager;
     private id:           number;
     private level:        number;
     private strength:     number;
@@ -101,15 +99,30 @@ export class HeroBot extends EventEmitter {
 
     public strategy: Farm.AvalibleStrategy_t;
 
-    private page: puppeteer.Page;
+    private resetTimer;
 
-    constructor(private browser: puppeteer.Browser,
+    constructor(private page: puppeteer.Page,
         l_settings)
     {
         super();
         this.running = false;
         this.inited = false;
         this.settings = { ...DefaulBotSettings, ...l_settings };
+
+        this.once('logined', () => {
+            this.scrapHeroInfo();
+        })
+
+        this.once('hero_info_scraped', () => {
+            this.inited = true;
+            this.emit('ready');
+        })
+
+        this.once('login_failed', () => {
+            this.Dispose();
+        })
+
+        this.doLogin();
     }
 
     deconstructor() {
@@ -120,9 +133,7 @@ export class HeroBot extends EventEmitter {
 
     get ConflictSide() { return this.conflictSide; }
     get Level()     { return this.level; }
-    get Abilities() { return this.abilities; }
-    get Items()     { return this.items; }
-    get Resources() { return this.items; }
+    get Resources() { return this.resources; }
 
     private async farmLoop(instance: HeroBot, preferedObjective: Farm.FarmStrategy) {
         await Promise.all([
@@ -140,15 +151,12 @@ export class HeroBot extends EventEmitter {
         }
     }
 
-    private async doHeroRest(callback: Farm.StrategyCallback, bot: HeroBot, farmObj) {
-    }
-
     // first do daliy quests
     // and go farm specified "dungeon"
     // by default farm towers
     public async Run() {
         if (!this.inited) {
-            await this.Initialize();
+            throw new Error("Cant run bot: Bot uninited!");
         } else if (this.running === true) {
             return;
         }
@@ -159,37 +167,32 @@ export class HeroBot extends EventEmitter {
         this.running = true;
         this.emit('started');
 
-        // Farm daily
-
-
-        // Farm dungeons
-
         let obj = Farm.Strategies.get(this.settings.farm.objective)
         await obj.Initialize(this);
 
-        obj.on('NeedRest', (callback: Farm.StrategyCallback, //return to farm callback
-                            farmObj: Farm.FarmStrategy) =>
+        await ItemManager.scrap(this.page);
+        console.log(ItemManager.getItems());
+        await sleep(100000);
+
+        obj.on('NeedRest', (farmObj: Farm.FarmStrategy) =>
             {
                 this.Stop();
 
                 // wait for farm stoped
                 this.once('stoped', async () => {
                     // go to menu and fetch stats
-                    await this.scrumHeroInfo();
-                    console.log(this);
+                    await this.scrapHeroInfo();
 
-                    // let wait: number = randomizeSleep(this.settings.stepInterval +
-                    //                                       Number(Math.max(this.health * this.regeneration/180 * 1000,
-                    //                                       this.energy * this.regeneration/60 * 1000).toFixed()),
-                    //                                   this.settings.randomize);
-                    let wait: number = this.settings.stepInterval +
-                                                          Number(Math.max(this.health * 1000 / (this.regeneration/180),
-                                                          this.energy * 1000 / (this.regeneration/60)).toFixed())
+                    let wait: number = randomizeSleep(this.settings.stepInterval +
+                                                      ((this.health === 0) ? this.health * 1000 / (this.regeneration/180) :
+                                                      this.energy * 1000 / (this.regeneration/60)),
+                                                      this.settings.randomize);
 
                     logMessage("Start resting for: " + wait)
 
-                    setTimeout(() => {
-                        callback(this).then(() => {
+                    this.emit('Resting');
+                    this.resetTimer = setTimeout(() => {
+                        farmObj.callback(this).then(() => {
                             this.running = true;
                             this.emit('started');
                             this.farmLoop(this, farmObj); // start
@@ -217,9 +220,10 @@ export class HeroBot extends EventEmitter {
 
     public Stop() {
         this.running = false;
+        clearInterval(this.resetTimer);
     }
 
-    public async scrumCurentHeroStats() {
+    public async scrapCurentHeroStats(): Promise<{health: number, energy: number}> {
         return await this.page.$$eval('table > tbody > tr > td > span', (vals) =>
             vals.map((val)=>Number(val.textContent)))
             .then((stats) => {
@@ -227,7 +231,7 @@ export class HeroBot extends EventEmitter {
             });
     }
 
-    public async scrumHeroInfo() {
+    public async scrapHeroInfo(): Promise<void> {
         try {
             await this.page.goto(url.main_menu); //exit from fight handle
             await this.page.goto(url.hero.main, {waitUntil: 'domcontentloaded'});
@@ -257,9 +261,6 @@ export class HeroBot extends EventEmitter {
                         this.heroClass = "Healer";
                     }
 
-                    console.log('"' + res[0].toString() + '"')
-                    console.log('"' + res[1].toString() + '"')
-
                     // conflict side
                     if (res[1].toString() == "юг") {
                         this.conflictSide = "South";
@@ -275,43 +276,12 @@ export class HeroBot extends EventEmitter {
             // items
             // await this.items.Update();
 
-            // resources
-            // await this.resources.Update();
-
-            this.emit('hero_info_scrumed');
+            this.emit('hero_info_scraped');
 
         } catch (err) {
-            this.emit('hero_info_scrum_failed')
+            this.emit('hero_info_scrap_failed')
             logMessage(err, LoggingLevel.Fatal);
-            throw new Error("Hero info scrum failed. Reason: " + err);
-        }
-    }
-
-    private async initializePage() {
-        try {
-            this.page = await this.browser.newPage();
-
-            // TODO
-            await this.page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3419.0 Safari/537.36')
-
-            await this.page.setDefaultNavigationTimeout(500000);
-            await this.page.on('dialog', async (dialog: puppeteer.Dialog) => {
-                await dialog.accept();
-            });
-            await this.page.on('error', function(err) {
-                const errorMessage = err.toString();
-                logMessage('browser error: '+ errorMessage, LoggingLevel.Fatal)
-            });
-            await this.page.on('pageerror', function(err) {
-                const errorMessage = err.toString();
-                logMessage('browser page error: ' + errorMessage, LoggingLevel.Fatal)
-            });
-
-            this.emit('page_initialized');
-        } catch(err) {
-            logMessage(err, LoggingLevel.Fatal)
-            this.emit('page_initialization_failed');
-            throw new Error("Page initialization error. Reason: " + err);
+            throw new Error("Hero info scrap failed. Reason: " + err);
         }
     }
 
@@ -344,34 +314,6 @@ export class HeroBot extends EventEmitter {
             throw new Error("Logging error. Reason: " + err);
         }
     }
-
-    public Initialize() {
-        if (this.inited === true) {
-            throw new Error("Attempt to reinitialize HeroBot.");
-            return;
-        }
-
-        this.once('page_initialized', () => {
-            this.doLogin();
-        });
-
-        this.once('logined', () => {
-            this.scrumHeroInfo();
-        })
-
-        this.once('hero_info_scrumed', () => {
-            this.inited = true;
-            this.emit('ready');
-        })
-
-        this.once('login_failed', () => {
-            this.Dispose();
-        })
-
-        // entry point
-        this.initializePage();
-    }
-
 };
 
 export default HeroBot;

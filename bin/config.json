@@ -5,42 +5,34 @@
                 "login": "siisgoo",
                 "password": "filso78gpk"
             },
-
             "session": {
                 "sessionTime": 3600000,
                 "sessionResumeTime": 1800000
             },
-
             "items": {
                 "useBottle": true,
-
                 "breakItems": true,
                 "breakLevel": 5,
                 "breakRarity": "green"
             },
-
             "farm": {
                 "objective": "Towers",
-                "settings":  "Auto"
+                "settings": "Auto"
             }
         }
     ],
-
     "config": {
         "puppeteer": {
             "Chromium": "/usr/bin/chromium",
             "headless": false
         },
-
         "multyAccount": {
-            "parallelismPolicy": "Squental",
-            "settings":
+            "parallelismPolicy": "MultyBrowser",
+            "settings": ""
         },
-
         "log_level": "Trace",
         "log_file": "./log"
     },
-
     "url": {
         "main_menu": "https://barbars.ru/",
         "login": "https://barbars.ru/login",
@@ -51,7 +43,6 @@
             "store": "http://barbars.ru/user/store",
             "resources": "http://barbars.ru/user/resources"
         },
-
         "fight": {
             "towers": "http://barbars.ru/game/towers",
             "ogreDungeon": "http://barbars.ru/game/ogreDungeon",

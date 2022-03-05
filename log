@@ -1,0 +1,427 @@
+[05:12:50] - Account "{"login":"siisgoo","password":"filso78gpk"}" has been logined successfuly
+[05:12:50] - Bot running with step interval: 1000 randomized by: 500
+[05:12:50] - Start fight step
+[05:12:50] - {"health":150,"energy":150}
+[05:12:50] - Scrumming context
+[05:12:50] - Scrumming nearby locations
+[05:12:51] - Going from capital...
+[05:12:51] - Going to other location
+[05:12:52] - Start fight step
+[05:12:52] - {"health":150,"energy":150}
+[05:12:52] - Scrumming context
+[05:12:52] - Scrum fight buttons
+[05:12:52] - Activating berserk ability...
+[05:12:52] - End fight step
+
+[05:12:53] - Start fight step
+[05:12:53] - {"health":150,"energy":100}
+[05:12:53] - Scrumming context
+[05:12:53] - Scrum fight buttons
+[05:12:53] - Hitting enemy...
+[05:12:53] - End fight step
+
+[05:12:55] - Start fight step
+[05:12:55] - {"health":150,"energy":81}
+[05:12:55] - Scrumming context
+[05:12:55] - Scrum fight buttons
+[05:12:55] - Hitting enemy...
+[05:12:55] - End fight step
+
+[05:12:56] - Start fight step
+[05:12:56] - {"health":150,"energy":58}
+[05:12:56] - Scrumming context
+[05:12:56] - Scrum fight buttons
+[05:12:56] - Hitting enemy...
+[05:12:56] - End fight step
+
+[05:12:57] - Start fight step
+[05:12:57] - {"health":150,"energy":36}
+[05:12:57] - Scrumming context
+[05:12:57] - Scrum fight buttons
+[05:12:57] - Hitting enemy...
+[05:12:57] - End fight step
+
+[05:12:59] - Start fight step
+[05:12:59] - {"health":150,"energy":14}
+[05:12:59] - Scrumming context
+[05:12:59] - Scrum fight buttons
+[05:12:59] - Hitting enemy...
+[05:12:59] - End fight step
+
+[05:13:00] - Start fight step
+[05:13:00] - {"health":150,"energy":0}
+[05:13:00] - Scrumming context
+[05:13:00] - Low health or energy
+[05:13:00] - Trying use bottle
+[05:13:00] - No bottle charges, go rest
+[05:13:00] - Health is low, resting...
+[05:13:00] - Stoping farming
+[05:13:01] - Start resting for: 181360
+[05:15:07] - Error: Navigation failed because browser has disconnected!
+[05:15:17] - Account "{"login":"siisgoo","password":"filso78gpk"}" has been logined successfuly
+[05:15:18] - Bot running with step interval: 1000 randomized by: 500
+[05:15:18] - Start fight step
+[05:15:18] - {"health":150,"energy":150}
+[05:15:18] - Scrumming context
+[05:15:18] - Scrumming nearby locations
+[05:15:18] - Going from capital...
+[05:15:18] - Going to other location
+[05:15:19] - Start fight step
+[05:15:19] - {"health":150,"energy":150}
+[05:15:19] - Scrumming context
+[05:15:19] - Scrum fight buttons
+[05:15:19] - Activating berserk ability...
+[05:15:19] - End fight step
+
+[05:15:20] - Start fight step
+[05:15:20] - {"health":150,"energy":100}
+[05:15:20] - Scrumming context
+[05:15:20] - Scrum fight buttons
+[05:15:20] - Hitting enemy...
+[05:15:20] - End fight step
+
+[05:15:21] - Start fight step
+[05:15:22] - Error: Execution context was destroyed, most likely because of a navigation.
+[05:15:36] - Account "{"login":"siisgoo","password":"filso78gpk"}" has been logined successfuly
+[05:15:37] - Account "{"login":"nexros","password":"53x0n7h3Be@ch"}" has been logined successfuly
+[05:15:37] - Bot running with step interval: 1000 randomized by: 500
+[05:15:37] - Start fight step
+[05:15:37] - {"health":150,"energy":121}
+[05:15:37] - Scrumming context
+[05:15:37] - Scrumming nearby locations
+[05:15:37] - Going from capital...
+[05:15:37] - Going to other location
+[05:15:37] - Bot running with step interval: 1000 randomized by: 500
+[05:15:37] - Start fight step
+[05:15:37] - {"health":150,"energy":122}
+[05:15:37] - Scrumming context
+[05:15:37] - Scrumming nearby locations
+[05:15:37] - Going from capital...
+[05:15:37] - Going to other location
+[05:15:39] - Start fight step
+[05:15:39] - {"health":150,"energy":123}
+[05:15:39] - Scrumming context
+[05:15:39] - Scrum fight buttons
+[05:15:39] - Hitting...
+[05:15:39] - End fight step
+
+[05:15:40] - Start fight step
+[05:15:40] - {"health":150,"energy":77}
+[05:15:40] - Scrumming context
+[05:15:40] - Scrum fight buttons
+[05:15:40] - Hitting enemy...
+[05:15:40] - Start fight step
+[05:15:40] - {"health":150,"energy":77}
+[05:15:40] - Scrumming context
+[05:15:40] - Scrum fight buttons
+[05:15:40] - Hitting enemy...
+[05:15:43] - End fight step
+
+[05:15:43] - End fight step
+
+[05:15:44] - Start fight step
+[05:15:44] - Error: Protocol error (Runtime.callFunctionOn): Session closed. Most likely the page has been closed.
+[06:39:01] - Account "{"login":"siisgoo","password":"filso78gpk"}" has been logined successfuly
+[06:39:01] - Bot running with step interval: 1000 randomized by: 500
+[06:39:01] - Start fight step
+[06:39:01] - {"health":150,"energy":150}
+[06:39:01] - Scrumming context
+[06:39:01] - Scrumming nearby locations
+[06:39:01] - Going from capital...
+[06:39:01] - Going to other location
+[06:39:03] - Start fight step
+[06:39:03] - {"health":150,"energy":150}
+[06:39:03] - Scrumming context
+[06:39:03] - Scrum fight buttons
+[06:39:03] - Activating berserk ability...
+[06:39:03] - End fight step
+
+[06:39:04] - Start fight step
+[06:39:04] - {"health":150,"energy":100}
+[06:39:04] - Scrumming context
+[06:39:04] - Scrum fight buttons
+[06:39:04] - Hitting enemy...
+[06:39:05] - End fight step
+
+[06:39:06] - Start fight step
+[06:39:06] - {"health":150,"energy":78}
+[06:39:06] - Scrumming context
+[06:39:06] - Scrum fight buttons
+[06:39:06] - Hitting enemy...
+[06:39:06] - End fight step
+
+[06:39:07] - Start fight step
+[06:39:07] - {"health":150,"energy":56}
+[06:39:07] - Scrumming context
+[06:39:07] - Scrum fight buttons
+[06:39:07] - Hitting enemy...
+[06:39:07] - End fight step
+
+[06:39:09] - Start fight step
+[06:39:09] - {"health":150,"energy":33}
+[06:39:09] - Scrumming context
+[06:39:09] - Scrum fight buttons
+[06:39:09] - Hitting enemy...
+[06:39:09] - End fight step
+
+[06:39:10] - Start fight step
+[06:39:10] - {"health":150,"energy":12}
+[06:39:10] - Scrumming context
+[06:39:10] - Scrum fight buttons
+[06:39:10] - Hitting enemy...
+[06:39:10] - End fight step
+
+[06:39:11] - Start fight step
+[06:39:11] - {"health":150,"energy":0}
+[06:39:11] - Scrumming context
+[06:39:11] - Low health or energy
+[06:39:11] - Trying use bottle
+[06:39:11] - No bottle charges, go rest
+[06:39:11] - Health is low, resting...
+[06:39:11] - Stoping farming
+[06:39:12] - Start resting for: 181279
+[06:42:13] - Start fight step
+[06:42:13] - {"health":150,"energy":150}
+[06:42:13] - Scrumming context
+[06:42:13] - Scrumming nearby locations
+[06:42:13] - Going from capital...
+[06:42:13] - Going to other location
+[06:42:14] - Start fight step
+[06:42:14] - {"health":150,"energy":150}
+[06:42:14] - Scrumming context
+[06:42:14] - Scrum fight buttons
+[06:42:14] - Activating berserk ability...
+[06:42:14] - End fight step
+
+[06:42:15] - Start fight step
+[06:42:15] - {"health":150,"energy":100}
+[06:42:15] - Scrumming context
+[06:42:15] - Scrum fight buttons
+[06:42:15] - Hitting enemy...
+[06:42:15] - End fight step
+
+[06:42:16] - Start fight step
+[06:42:16] - {"health":150,"energy":80}
+[06:42:16] - Scrumming context
+[06:42:16] - Scrum fight buttons
+[06:42:16] - Hitting enemy...
+[06:42:17] - End fight step
+
+[06:42:18] - Start fight step
+[06:42:18] - {"health":150,"energy":59}
+[06:42:18] - Scrumming context
+[06:42:18] - Scrum fight buttons
+[06:42:18] - Hitting enemy...
+[06:42:18] - End fight step
+
+[06:42:19] - Start fight step
+[06:42:19] - {"health":150,"energy":38}
+[06:42:19] - Scrumming context
+[06:42:19] - Scrum fight buttons
+[06:42:19] - Hitting enemy...
+[06:42:19] - End fight step
+
+[06:42:20] - Start fight step
+[06:42:20] - {"health":150,"energy":15}
+[06:42:20] - Scrumming context
+[06:42:20] - Scrum fight buttons
+[06:42:20] - Hitting enemy...
+[06:42:20] - End fight step
+
+[06:42:22] - Start fight step
+[06:42:22] - {"health":150,"energy":0}
+[06:42:22] - Scrumming context
+[06:42:22] - Low health or energy
+[06:42:22] - Trying use bottle
+[06:42:22] - No bottle charges, go rest
+[06:42:22] - Health is low, resting...
+[06:42:22] - Stoping farming
+[06:42:23] - Start resting for: 181379
+[06:45:27] - Account "{"login":"siisgoo","password":"filso78gpk"}" has been logined successfuly
+[06:45:28] - Bot running with step interval: 1000 randomized by: 500
+[06:45:28] - Start fight step
+[06:45:28] - {"health":150,"energy":150}
+[06:45:28] - Scrumming context
+[06:45:28] - Scrumming nearby locations
+[06:45:28] - Going from capital...
+[06:45:28] - Going to other location
+[06:45:29] - Start fight step
+[06:45:29] - {"health":150,"energy":150}
+[06:45:29] - Scrumming context
+[06:45:29] - Scrum fight buttons
+[06:45:29] - Activating berserk ability...
+[06:45:29] - End fight step
+
+[06:45:30] - Start fight step
+[06:45:30] - {"health":150,"energy":100}
+[06:45:30] - Scrumming context
+[06:45:30] - Scrum fight buttons
+[06:45:30] - Hitting enemy...
+[06:45:31] - End fight step
+
+[06:45:32] - Start fight step
+[06:45:32] - {"health":150,"energy":79}
+[06:45:32] - Scrumming context
+[06:45:32] - Scrum fight buttons
+[06:45:32] - Hitting enemy...
+[06:45:32] - End fight step
+
+[06:45:33] - Start fight step
+[06:45:33] - {"health":150,"energy":58}
+[06:45:33] - Scrumming context
+[06:45:33] - Scrum fight buttons
+[06:45:33] - Hitting enemy...
+[06:45:33] - End fight step
+
+[06:45:35] - Start fight step
+[06:45:35] - {"health":150,"energy":37}
+[06:45:35] - Scrumming context
+[06:45:35] - Scrum fight buttons
+[06:45:35] - Hitting enemy...
+[06:45:35] - End fight step
+
+[06:45:36] - Start fight step
+[06:45:36] - {"health":150,"energy":15}
+[06:45:36] - Scrumming context
+[06:45:36] - Scrum fight buttons
+[06:45:36] - Hitting enemy...
+[06:45:36] - End fight step
+
+[06:45:37] - Start fight step
+[06:45:38] - {"health":150,"energy":0}
+[06:45:38] - Scrumming context
+[06:45:38] - Low health or energy
+[06:45:38] - Trying use bottle
+[06:45:38] - No bottle charges, go rest
+[06:45:38] - Health is low, resting...
+[06:45:38] - Stoping farming
+[06:45:38] - Start resting for: 61356
+[06:46:40] - Start fight step
+[06:46:40] - {"health":150,"energy":150}
+[06:46:40] - Scrumming context
+[06:46:40] - Scrumming nearby locations
+[06:46:40] - Going from capital...
+[06:46:40] - Going to other location
+[06:46:41] - Start fight step
+[06:46:41] - {"health":150,"energy":150}
+[06:46:41] - Scrumming context
+[06:46:41] - Scrum fight buttons
+[06:46:41] - Activating berserk ability...
+[06:46:41] - End fight step
+
+[06:46:42] - Start fight step
+[06:46:42] - {"health":150,"energy":100}
+[06:46:42] - Scrumming context
+[06:46:42] - Scrum fight buttons
+[06:46:42] - Hitting enemy...
+[06:46:43] - End fight step
+
+[06:46:44] - Start fight step
+[06:46:44] - {"health":150,"energy":79}
+[06:46:44] - Scrumming context
+[06:46:44] - Scrum fight buttons
+[06:46:44] - Hitting enemy...
+[06:46:44] - End fight step
+
+[06:46:45] - Start fight step
+[06:46:45] - {"health":150,"energy":56}
+[06:46:45] - Scrumming context
+[06:46:45] - Scrum fight buttons
+[06:46:45] - Hitting enemy...
+[06:46:46] - End fight step
+
+[06:46:47] - Start fight step
+[06:46:47] - {"health":150,"energy":33}
+[06:46:47] - Scrumming context
+[06:46:47] - Scrum fight buttons
+[06:46:47] - Hitting enemy...
+[06:46:47] - End fight step
+
+[06:46:48] - Start fight step
+[06:46:48] - {"health":150,"energy":12}
+[06:46:48] - Scrumming context
+[06:46:48] - Scrum fight buttons
+[06:46:48] - Hitting enemy...
+[06:46:48] - End fight step
+
+[06:46:49] - Start fight step
+[06:46:49] - {"health":150,"energy":0}
+[06:46:49] - Scrumming context
+[06:46:49] - Low health or energy
+[06:46:49] - Trying use bottle
+[06:46:49] - No bottle charges, go rest
+[06:46:49] - Health is low, resting...
+[06:46:49] - Stoping farming
+[06:46:50] - Start resting for: 61418
+[06:47:51] - Start fight step
+[06:47:51] - {"health":150,"energy":150}
+[06:47:51] - Scrumming context
+[06:47:51] - Scrumming nearby locations
+[06:47:51] - Going from capital...
+[06:47:51] - Going to other location
+[06:47:53] - Start fight step
+[06:47:53] - {"health":150,"energy":150}
+[06:47:53] - Scrumming context
+[06:47:53] - Scrum fight buttons
+[06:47:53] - Activating berserk ability...
+[06:47:53] - End fight step
+
+[06:47:54] - Start fight step
+[06:47:54] - {"health":150,"energy":100}
+[06:47:54] - Scrumming context
+[06:47:54] - Scrum fight buttons
+[06:47:54] - Hitting enemy...
+[06:47:54] - End fight step
+
+[06:47:55] - Start fight step
+[06:47:55] - {"health":150,"energy":79}
+[06:47:55] - Scrumming context
+[06:47:55] - Scrum fight buttons
+[06:47:55] - Hitting enemy...
+[06:47:56] - End fight step
+
+[06:47:57] - Start fight step
+[06:47:57] - {"health":150,"energy":57}
+[06:47:57] - Scrumming context
+[06:47:57] - Scrum fight buttons
+[06:47:57] - Hitting enemy...
+[06:47:57] - End fight step
+
+[06:47:58] - Start fight step
+[06:47:58] - {"health":150,"energy":34}
+[06:47:58] - Scrumming context
+[06:47:58] - Scrum fight buttons
+[06:47:58] - Hitting enemy...
+[06:47:58] - End fight step
+
+[06:48:00] - Start fight step
+[06:48:00] - {"health":150,"energy":13}
+[06:48:00] - Scrumming context
+[06:48:00] - Scrum fight buttons
+[06:48:00] - Hitting enemy...
+[06:48:00] - End fight step
+
+[06:48:01] - Start fight step
+[06:48:01] - {"health":150,"energy":0}
+[06:48:01] - Scrumming context
+[06:48:01] - Low health or energy
+[06:48:01] - Trying use bottle
+[06:48:01] - No bottle charges, go rest
+[06:48:01] - Health is low, resting...
+[06:48:01] - Stoping farming
+[06:48:02] - Start resting for: 61135
+[07:40:42] - Account "{"login":"siisgoo","password":"filso78gpk"}" has been logined successfuly
+[07:40:42] - Bot running with step interval: 500 randomized by: 1500
+[07:45:53] - Account "{"login":"siisgoo","password":"filso78gpk"}" has been logined successfuly
+[07:45:53] - Bot running with step interval: 500 randomized by: 1500
+[07:46:39] - Account "{"login":"siisgoo","password":"filso78gpk"}" has been logined successfuly
+[07:46:39] - Bot running with step interval: 500 randomized by: 1500
+[07:50:35] - Account "{"login":"siisgoo","password":"filso78gpk"}" has been logined successfuly
+[07:50:36] - Bot running with step interval: 500 randomized by: 1500
+[07:53:03] - Account "{"login":"siisgoo","password":"filso78gpk"}" has been logined successfuly
+[07:53:04] - Bot running with step interval: 500 randomized by: 1500
+[07:57:11] - Account "{"login":"siisgoo","password":"filso78gpk"}" has been logined successfuly
+[07:57:12] - Bot running with step interval: 500 randomized by: 1500
+[07:57:32] - Error: Protocol error: Connection closed. Most likely the page has been closed.
+[07:57:40] - Account "{"login":"siisgoo","password":"filso78gpk"}" has been logined successfuly
+[07:57:41] - Bot running with step interval: 500 randomized by: 1500
