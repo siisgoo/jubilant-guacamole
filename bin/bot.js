@@ -63,20 +63,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HeroBot = void 0;
-var items_js_1 = require("./items.js");
 var utils_js_1 = require("./utils.js");
 var Farm = require("./farm.js");
 var events_1 = require("events");
 var config_json_1 = require("./config.json");
 ;
 var DefaulBotSettings = {
-    stepInterval: 500,
+    stepInterval: 800,
     randomize: 1500,
-    // use it split?
-    auth: {
-        login: "",
-        password: "",
-    },
     session: {
         sessionTime: 1000 * 60 * 60,
         sessionResumeTime: 1000 * 60 * 10,
@@ -92,19 +86,28 @@ var DefaulBotSettings = {
         settings: "Hero",
     },
 };
+//
+// Signals:
+//  'logined'
+//  'login_failed'
+//  'ready'
+//  'started'
+//  'stoped'
+//  'Resting'
 var HeroBot = /** @class */ (function (_super) {
     __extends(HeroBot, _super);
-    function HeroBot(browser, l_settings) {
+    function HeroBot(page, login, password, l_settings) {
         var _this = _super.call(this) || this;
-        _this.browser = browser;
+        _this.page = page;
+        _this.login = login;
+        _this.password = password;
         _this.running = false;
         _this.inited = false;
         _this.settings = __assign(__assign({}, DefaulBotSettings), l_settings);
+        _this.sessionTimer = setTimeout(_this.onSessionRunout, _this.settings.session.sessionTime);
+        _this.Init();
         return _this;
     }
-    HeroBot.prototype.deconstructor = function () {
-        this.Dispose(); // its asynk, ok?
-    };
     Object.defineProperty(HeroBot.prototype, "Page", {
         get: function () { return this.page; },
         enumerable: false,
@@ -125,24 +128,58 @@ var HeroBot = /** @class */ (function (_super) {
         enumerable: false,
         configurable: true
     });
+    HeroBot.prototype.deconstructor = function () {
+        this.Dispose(); // its asynk, ok?
+    };
+    HeroBot.prototype.Init = function () {
+        var _this = this;
+        this.once('logined', function () {
+            _this.scrapHeroInfo();
+        });
+        this.once('hero_info_scraped', function () {
+            _this.inited = true;
+            _this.emit('ready');
+        });
+        this.once('login_failed', function () {
+            _this.Dispose();
+        });
+        this.doLogin();
+    };
+    HeroBot.prototype.onSessionRunout = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                this.Stop();
+                this.Dispose();
+                this.sessionResumeTimer = setTimeout(function () {
+                    _this.Init();
+                    _this.once('ready', _this.Run);
+                }, this.settings.session.sessionResumeTime);
+                return [2 /*return*/];
+            });
+        });
+    };
+    // Main bot loop
     HeroBot.prototype.farmLoop = function (instance, preferedObjective) {
         return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0: return [4 /*yield*/, Promise.all([
                             preferedObjective.execute(instance.settings.farm.settings, instance.settings.items)
                         ])];
                     case 1:
-                        _a.sent();
+                        _b.sent();
                         if (!(instance.running === true)) return [3 /*break*/, 3];
+                        _a = instance;
                         return [4 /*yield*/, setTimeout(instance.farmLoop, (0, utils_js_1.randomizeSleep)(instance.settings.stepInterval, instance.settings.randomize), instance, preferedObjective)];
                     case 2:
-                        _a.sent();
+                        _a.farmTimer = _b.sent();
                         return [3 /*break*/, 4];
                     case 3:
                         (0, utils_js_1.logMessage)("Stoping farming");
                         instance.emit('stoped');
-                        _a.label = 4;
+                        _b.label = 4;
                     case 4: return [2 /*return*/];
                 }
             });
@@ -158,31 +195,19 @@ var HeroBot = /** @class */ (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (!!this.inited) return [3 /*break*/, 2];
-                        return [4 /*yield*/, this.Initialize()];
-                    case 1:
-                        _a.sent();
-                        return [3 /*break*/, 3];
-                    case 2:
-                        if (this.running === true) {
+                        if (!this.inited) {
+                            throw new Error("Cant run bot: Bot uninited!");
+                        }
+                        else if (this.running === true) {
                             return [2 /*return*/];
                         }
-                        _a.label = 3;
-                    case 3:
                         (0, utils_js_1.logMessage)("Bot running with step interval: " + this.settings.stepInterval
                             + " randomized by: " + this.settings.randomize);
                         this.running = true;
                         this.emit('started');
                         obj = Farm.Strategies.get(this.settings.farm.objective);
                         return [4 /*yield*/, obj.Initialize(this)];
-                    case 4:
-                        _a.sent();
-                        return [4 /*yield*/, items_js_1.ItemManager.scrum(this.page)];
-                    case 5:
-                        _a.sent();
-                        console.log(items_js_1.ItemManager.getItems());
-                        return [4 /*yield*/, (0, utils_js_1.sleep)(100000)];
-                    case 6:
+                    case 1:
                         _a.sent();
                         obj.on('NeedRest', function (farmObj) {
                             _this.Stop();
@@ -194,7 +219,7 @@ var HeroBot = /** @class */ (function (_super) {
                                     switch (_a.label) {
                                         case 0: 
                                         // go to menu and fetch stats
-                                        return [4 /*yield*/, this.scrumHeroInfo()];
+                                        return [4 /*yield*/, this.scrapHeroInfo()];
                                         case 1:
                                             // go to menu and fetch stats
                                             _a.sent();
@@ -202,7 +227,8 @@ var HeroBot = /** @class */ (function (_super) {
                                                 ((this.health === 0) ? this.health * 1000 / (this.regeneration / 180) :
                                                     this.energy * 1000 / (this.regeneration / 60)), this.settings.randomize);
                                             (0, utils_js_1.logMessage)("Start resting for: " + wait);
-                                            setTimeout(function () {
+                                            this.emit('Resting');
+                                            this.resetTimer = setTimeout(function () {
                                                 farmObj.callback(_this).then(function () {
                                                     _this.running = true;
                                                     _this.emit('started');
@@ -226,27 +252,32 @@ var HeroBot = /** @class */ (function (_super) {
             });
         });
     };
+    // Close page and set bot object state as uninited
     HeroBot.prototype.Dispose = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         this.inited = false;
-                        return [4 /*yield*/, this.Stop()];
-                    case 1:
-                        _a.sent();
+                        this.running = false;
                         return [4 /*yield*/, this.page.close()];
-                    case 2:
+                    case 1:
                         _a.sent();
                         return [2 /*return*/];
                 }
             });
         });
     };
+    // Stop main bot loop
+    // Imidiatly stops rest timer
+    // but dont interapt farm step
+    // for get real state of bot, listen 'stoped' signal
     HeroBot.prototype.Stop = function () {
         this.running = false;
+        clearInterval(this.resetTimer);
     };
-    HeroBot.prototype.scrumCurentHeroStats = function () {
+    // Scrap hp and energy
+    HeroBot.prototype.scrapCurentHeroStats = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -261,7 +292,8 @@ var HeroBot = /** @class */ (function (_super) {
             });
         });
     };
-    HeroBot.prototype.scrumHeroInfo = function () {
+    // Scrap all hero stats exclude invinitory and resources info
+    HeroBot.prototype.scrapHeroInfo = function () {
         return __awaiter(this, void 0, void 0, function () {
             var target, statSpans, _a, err_1;
             var _this = this;
@@ -322,79 +354,22 @@ var HeroBot = /** @class */ (function (_super) {
                     case 7:
                         // level
                         _a.level = _b.sent();
-                        // items
-                        // await this.items.Update();
-                        this.emit('hero_info_scrumed');
+                        this.emit('hero_info_scraped');
                         return [3 /*break*/, 9];
                     case 8:
                         err_1 = _b.sent();
-                        this.emit('hero_info_scrum_failed');
+                        this.emit('hero_info_scrap_failed');
                         (0, utils_js_1.logMessage)(err_1, utils_js_1.LoggingLevel.Fatal);
-                        throw new Error("Hero info scrum failed. Reason: " + err_1);
+                        throw new Error("Hero info scrap failed. Reason: " + err_1);
                     case 9: return [2 /*return*/];
                 }
             });
         });
     };
-    HeroBot.prototype.initializePage = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var _a, err_2;
-            var _this = this;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        _b.trys.push([0, 7, , 8]);
-                        _a = this;
-                        return [4 /*yield*/, this.browser.newPage()];
-                    case 1:
-                        _a.page = _b.sent();
-                        // TODO
-                        return [4 /*yield*/, this.page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3419.0 Safari/537.36')];
-                    case 2:
-                        // TODO
-                        _b.sent();
-                        return [4 /*yield*/, this.page.setDefaultNavigationTimeout(500000)];
-                    case 3:
-                        _b.sent();
-                        return [4 /*yield*/, this.page.on('dialog', function (dialog) { return __awaiter(_this, void 0, void 0, function () {
-                                return __generator(this, function (_a) {
-                                    switch (_a.label) {
-                                        case 0: return [4 /*yield*/, dialog.accept()];
-                                        case 1:
-                                            _a.sent();
-                                            return [2 /*return*/];
-                                    }
-                                });
-                            }); })];
-                    case 4:
-                        _b.sent();
-                        return [4 /*yield*/, this.page.on('error', function (err) {
-                                var errorMessage = err.toString();
-                                (0, utils_js_1.logMessage)('browser error: ' + errorMessage, utils_js_1.LoggingLevel.Fatal);
-                            })];
-                    case 5:
-                        _b.sent();
-                        return [4 /*yield*/, this.page.on('pageerror', function (err) {
-                                var errorMessage = err.toString();
-                                (0, utils_js_1.logMessage)('browser page error: ' + errorMessage, utils_js_1.LoggingLevel.Fatal);
-                            })];
-                    case 6:
-                        _b.sent();
-                        this.emit('page_initialized');
-                        return [3 /*break*/, 8];
-                    case 7:
-                        err_2 = _b.sent();
-                        (0, utils_js_1.logMessage)(err_2, utils_js_1.LoggingLevel.Fatal);
-                        this.emit('page_initialization_failed');
-                        throw new Error("Page initialization error. Reason: " + err_2);
-                    case 8: return [2 /*return*/];
-                }
-            });
-        });
-    };
+    // Login
     HeroBot.prototype.doLogin = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var err_3;
+            var err_2;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -405,16 +380,16 @@ var HeroBot = /** @class */ (function (_super) {
                         _a.sent();
                         return [4 /*yield*/, this.page.waitForSelector('input[value="Войти"]')
                                 .then(function () { return _this.page.focus('input[name="login"]'); })
-                                .then(function () { return _this.page.type('input[name="login"]', _this.settings.auth.login); })
+                                .then(function () { return _this.page.type('input[name="login"]', _this.login); })
                                 .then(function () { return _this.page.focus('input[name="password"]'); })
-                                .then(function () { return _this.page.type('input[name="password"]', _this.settings.auth.password); })
+                                .then(function () { return _this.page.type('input[name="password"]', _this.password); })
                                 .then(function () { return _this.page.click('input[value="Войти"]'); })
-                                .then(function () { return _this.page.waitForTimeout(1000); })
+                                // .then(() => this.page.waitForTimeout(1000))
                                 .then(function () { return __awaiter(_this, void 0, void 0, function () {
                                 var _this = this;
                                 return __generator(this, function (_a) {
                                     switch (_a.label) {
-                                        case 0: return [4 /*yield*/, this.page.waitForSelector('a[href="user"]', { visible: true, timeout: 3000 })
+                                        case 0: return [4 /*yield*/, this.page.waitForSelector('a[href="user"]', { visible: true, timeout: 10000 })
                                                 .then(function () {
                                                 _this.emit('logined');
                                             })
@@ -440,35 +415,13 @@ var HeroBot = /** @class */ (function (_super) {
                         _a.sent();
                         return [3 /*break*/, 4];
                     case 3:
-                        err_3 = _a.sent();
-                        (0, utils_js_1.logMessage)(err_3, utils_js_1.LoggingLevel.Fatal);
-                        throw new Error("Logging error. Reason: " + err_3);
+                        err_2 = _a.sent();
+                        (0, utils_js_1.logMessage)(err_2, utils_js_1.LoggingLevel.Fatal);
+                        throw new Error("Logging error. Reason: " + err_2);
                     case 4: return [2 /*return*/];
                 }
             });
         });
-    };
-    HeroBot.prototype.Initialize = function () {
-        var _this = this;
-        if (this.inited === true) {
-            throw new Error("Attempt to reinitialize HeroBot.");
-            return;
-        }
-        this.once('page_initialized', function () {
-            _this.doLogin();
-        });
-        this.once('logined', function () {
-            _this.scrumHeroInfo();
-        });
-        this.once('hero_info_scrumed', function () {
-            _this.inited = true;
-            _this.emit('ready');
-        });
-        this.once('login_failed', function () {
-            _this.Dispose();
-        });
-        // entry point
-        this.initializePage();
     };
     return HeroBot;
 }(events_1.EventEmitter));

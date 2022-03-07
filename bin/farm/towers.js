@@ -112,7 +112,7 @@ var FarmTowers = /** @class */ (function (_super) {
                         return [4 /*yield*/, bot.Page.goto(config_json_1.url.fight.towers, { waitUntil: 'domcontentloaded' })];
                     case 1:
                         _a.sent();
-                        return [4 /*yield*/, this.bot.Page.waitForSelector('div > a', { timeout: 30000, visible: true })];
+                        return [4 /*yield*/, this.bot.Page.waitForSelector('div > a', { timeout: 10000, visible: true })];
                     case 2:
                         _a.sent();
                         this.locations = new Map;
@@ -123,73 +123,34 @@ var FarmTowers = /** @class */ (function (_super) {
         });
     };
     FarmTowers.prototype.execute = function (settings, itemSettings) {
-        var e_1, _a;
         return __awaiter(this, void 0, void 0, function () {
-            var stats, indicators, indicators_1, indicators_1_1, ind, src, e_1_1, _b, currentLocation, err_1;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
+            var stats, _a, currentLocation, err_1;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
-                        _c.trys.push([0, 33, , 34]);
+                        _b.trys.push([0, 19, , 20]);
                         (0, utils_js_1.logMessage)("Start fight step");
-                        return [4 /*yield*/, this.bot.scrumCurentHeroStats()];
+                        return [4 /*yield*/, this.bot.scrapCurentHeroStats()];
                     case 1:
-                        stats = _c.sent();
+                        stats = _b.sent();
                         (0, utils_js_1.logMessage)(JSON.stringify(stats));
-                        return [4 /*yield*/, this.scrumContext()];
+                        return [4 /*yield*/, this.scrapContext()];
                     case 2:
-                        _c.sent();
+                        _b.sent();
                         if (this.sel.size <= 0) {
                             throw new Error("No nawigation buttions");
                         }
-                        return [4 /*yield*/, this.bot.Page.$$('a > img')];
-                    case 3:
-                        indicators = _c.sent();
-                        _c.label = 4;
-                    case 4:
-                        _c.trys.push([4, 10, 11, 16]);
-                        indicators_1 = __asyncValues(indicators);
-                        _c.label = 5;
-                    case 5: return [4 /*yield*/, indicators_1.next()];
-                    case 6:
-                        if (!(indicators_1_1 = _c.sent(), !indicators_1_1.done)) return [3 /*break*/, 9];
-                        ind = indicators_1_1.value;
-                        return [4 /*yield*/, ind.getProperty('src').then(function (e) { return e.jsonValue(); })];
-                    case 7:
-                        src = _c.sent();
-                        if (src == "/images/icons/bag_better.gif") {
-                            this.emit('RackBetter');
-                        }
-                        _c.label = 8;
-                    case 8: return [3 /*break*/, 5];
-                    case 9: return [3 /*break*/, 16];
-                    case 10:
-                        e_1_1 = _c.sent();
-                        e_1 = { error: e_1_1 };
-                        return [3 /*break*/, 16];
-                    case 11:
-                        _c.trys.push([11, , 14, 15]);
-                        if (!(indicators_1_1 && !indicators_1_1.done && (_a = indicators_1.return))) return [3 /*break*/, 13];
-                        return [4 /*yield*/, _a.call(indicators_1)];
-                    case 12:
-                        _c.sent();
-                        _c.label = 13;
-                    case 13: return [3 /*break*/, 15];
-                    case 14:
-                        if (e_1) throw e_1.error;
-                        return [7 /*endfinally*/];
-                    case 15: return [7 /*endfinally*/];
-                    case 16:
-                        if (!(stats.energy === 0 || stats.health === 0)) return [3 /*break*/, 19];
+                        if (!(stats.energy === 0 || stats.health === 0)) return [3 /*break*/, 5];
                         (0, utils_js_1.logMessage)("Low health or energy", utils_js_1.LoggingLevel.Trace);
-                        _b = itemSettings.useBottle === true;
-                        if (!_b) return [3 /*break*/, 18];
+                        _a = itemSettings.useBottle === true;
+                        if (!_a) return [3 /*break*/, 4];
                         return [4 /*yield*/, this.useBottle()];
-                    case 17:
-                        _b = (_c.sent());
-                        _c.label = 18;
-                    case 18:
+                    case 3:
+                        _a = (_b.sent());
+                        _b.label = 4;
+                    case 4:
                         // use bottle
-                        if (_b) {
+                        if (_a) {
                             (0, utils_js_1.logMessage)("Exiging farm for healing");
                             return [2 /*return*/]; //exit for new iteration
                         }
@@ -198,60 +159,60 @@ var FarmTowers = /** @class */ (function (_super) {
                             this.emit('NeedRest', this);
                             return [2 /*return*/]; // reload
                         }
-                        _c.label = 19;
-                    case 19: return [4 /*yield*/, this.bot.Page.$eval('div > h1 > span', function (el) { return el.textContent; })];
-                    case 20:
-                        currentLocation = _c.sent();
+                        _b.label = 5;
+                    case 5: return [4 /*yield*/, this.bot.Page.$eval('div > h1 > span', function (el) { return el.textContent; })];
+                    case 6:
+                        currentLocation = _b.sent();
                         if (!(currentLocation === "Карaкорум, стoлицa Юга"
-                            || currentLocation === "столица г. Мидгард")) return [3 /*break*/, 23];
-                        return [4 /*yield*/, this.scrumNearLocations()];
-                    case 21:
-                        _c.sent();
+                            || currentLocation === "столица г. Мидгард")) return [3 /*break*/, 9];
+                        return [4 /*yield*/, this.scrapNearLocations()];
+                    case 7:
+                        _b.sent();
                         (0, utils_js_1.logMessage)("Going from capital...");
                         return [4 /*yield*/, this.goToLocation(this.heroPreferedLocation())];
-                    case 22:
-                        _c.sent();
+                    case 8:
+                        _b.sent();
                         return [2 /*return*/];
-                    case 23: return [4 /*yield*/, this.scrumFightButtons()];
-                    case 24:
-                        _c.sent();
-                        if (!this.fightButtons.has('Berserk')) return [3 /*break*/, 26];
+                    case 9: return [4 /*yield*/, this.scrapFightButtons()];
+                    case 10:
+                        _b.sent();
+                        if (!this.fightButtons.has('Berserk')) return [3 /*break*/, 12];
                         (0, utils_js_1.logMessage)("Activating berserk ability...");
                         return [4 /*yield*/, (0, utils_js_1.SmartClick)(this.fightButtons.get('Berserk'))];
-                    case 25:
-                        _c.sent();
-                        return [3 /*break*/, 32];
-                    case 26:
-                        if (!this.fightButtons.has('HitTower')) return [3 /*break*/, 28];
+                    case 11:
+                        _b.sent();
+                        return [3 /*break*/, 18];
+                    case 12:
+                        if (!this.fightButtons.has('HitTower')) return [3 /*break*/, 14];
                         (0, utils_js_1.logMessage)("Hitting tower...");
                         return [4 /*yield*/, (0, utils_js_1.SmartClick)(this.fightButtons.get('HitTower'))];
-                    case 27:
-                        _c.sent();
-                        return [3 /*break*/, 32];
-                    case 28:
-                        if (!this.fightButtons.has('FinishOff')) return [3 /*break*/, 30];
+                    case 13:
+                        _b.sent();
+                        return [3 /*break*/, 18];
+                    case 14:
+                        if (!this.fightButtons.has('FinishOff')) return [3 /*break*/, 16];
                         (0, utils_js_1.logMessage)("Hitting enemy...");
                         return [4 /*yield*/, (0, utils_js_1.SmartClick)(this.fightButtons.get('FinishOff'))];
-                    case 29:
-                        _c.sent();
-                        return [3 /*break*/, 32];
-                    case 30:
-                        if (!this.fightButtons.has('Hit')) return [3 /*break*/, 32];
+                    case 15:
+                        _b.sent();
+                        return [3 /*break*/, 18];
+                    case 16:
+                        if (!this.fightButtons.has('Hit')) return [3 /*break*/, 18];
                         (0, utils_js_1.logMessage)("Hitting...");
                         return [4 /*yield*/, (0, utils_js_1.SmartClick)(this.fightButtons.get('Hit'))];
-                    case 31:
-                        _c.sent();
-                        _c.label = 32;
-                    case 32:
-                        this.bot.Page.waitForNetworkIdle({ timeout: 5000 });
+                    case 17:
+                        _b.sent();
+                        _b.label = 18;
+                    case 18:
+                        this.bot.Page.waitForNetworkIdle({ timeout: 10000 });
                         this.sel.clear();
                         (0, utils_js_1.logMessage)("End fight step" + '\n');
-                        return [3 /*break*/, 34];
-                    case 33:
-                        err_1 = _c.sent();
+                        return [3 /*break*/, 20];
+                    case 19:
+                        err_1 = _b.sent();
                         (0, utils_js_1.logMessage)(err_1, utils_js_1.LoggingLevel.Fatal);
                         throw new Error("Error occured while fighting: " + err_1);
-                    case 34: return [2 /*return*/];
+                    case 20: return [2 /*return*/];
                 }
             });
         });
@@ -291,7 +252,7 @@ var FarmTowers = /** @class */ (function (_super) {
         }
         return ret;
     };
-    FarmTowers.prototype.scrumContext = function () {
+    FarmTowers.prototype.scrapContext = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _a, _b;
             return __generator(this, function (_c) {
@@ -308,10 +269,10 @@ var FarmTowers = /** @class */ (function (_super) {
             });
         });
     };
-    FarmTowers.prototype.scrumNearLocations = function () {
-        var e_2, _a;
+    FarmTowers.prototype.scrapNearLocations = function () {
+        var e_1, _a;
         return __awaiter(this, void 0, void 0, function () {
-            var _b, _c, el, text, e_2_1;
+            var _b, _c, el, text, e_1_1;
             return __generator(this, function (_d) {
                 switch (_d.label) {
                     case 0:
@@ -336,8 +297,8 @@ var FarmTowers = /** @class */ (function (_super) {
                     case 5: return [3 /*break*/, 2];
                     case 6: return [3 /*break*/, 13];
                     case 7:
-                        e_2_1 = _d.sent();
-                        e_2 = { error: e_2_1 };
+                        e_1_1 = _d.sent();
+                        e_1 = { error: e_1_1 };
                         return [3 /*break*/, 13];
                     case 8:
                         _d.trys.push([8, , 11, 12]);
@@ -348,7 +309,7 @@ var FarmTowers = /** @class */ (function (_super) {
                         _d.label = 10;
                     case 10: return [3 /*break*/, 12];
                     case 11:
-                        if (e_2) throw e_2.error;
+                        if (e_1) throw e_1.error;
                         return [7 /*endfinally*/];
                     case 12: return [7 /*endfinally*/];
                     case 13: return [2 /*return*/];
@@ -376,11 +337,11 @@ var FarmTowers = /** @class */ (function (_super) {
             });
         });
     };
-    // scrum beat buttons and ability buttons
-    FarmTowers.prototype.scrumFightButtons = function () {
-        var e_3, _a;
+    // scrap beat buttons and ability buttons
+    FarmTowers.prototype.scrapFightButtons = function () {
+        var e_2, _a;
         return __awaiter(this, void 0, void 0, function () {
-            var _b, _c, el, text, inner, e_3_1;
+            var _b, _c, el, text, inner, e_2_1;
             return __generator(this, function (_d) {
                 switch (_d.label) {
                     case 0:
@@ -422,8 +383,8 @@ var FarmTowers = /** @class */ (function (_super) {
                     case 9: return [3 /*break*/, 2];
                     case 10: return [3 /*break*/, 17];
                     case 11:
-                        e_3_1 = _d.sent();
-                        e_3 = { error: e_3_1 };
+                        e_2_1 = _d.sent();
+                        e_2 = { error: e_2_1 };
                         return [3 /*break*/, 17];
                     case 12:
                         _d.trys.push([12, , 15, 16]);
@@ -434,7 +395,7 @@ var FarmTowers = /** @class */ (function (_super) {
                         _d.label = 14;
                     case 14: return [3 /*break*/, 16];
                     case 15:
-                        if (e_3) throw e_3.error;
+                        if (e_2) throw e_2.error;
                         return [7 /*endfinally*/];
                     case 16: return [7 /*endfinally*/];
                     case 17: return [2 /*return*/];
@@ -443,9 +404,9 @@ var FarmTowers = /** @class */ (function (_super) {
         });
     };
     FarmTowers.prototype.useBottle = function () {
-        var e_4, _a;
+        var e_3, _a;
         return __awaiter(this, void 0, void 0, function () {
-            var button, _b, _c, el, text, inner, e_4_1;
+            var button, _b, _c, el, text, inner, e_3_1;
             return __generator(this, function (_d) {
                 switch (_d.label) {
                     case 0:
@@ -474,8 +435,8 @@ var FarmTowers = /** @class */ (function (_super) {
                     case 6: return [3 /*break*/, 2];
                     case 7: return [3 /*break*/, 14];
                     case 8:
-                        e_4_1 = _d.sent();
-                        e_4 = { error: e_4_1 };
+                        e_3_1 = _d.sent();
+                        e_3 = { error: e_3_1 };
                         return [3 /*break*/, 14];
                     case 9:
                         _d.trys.push([9, , 12, 13]);
@@ -486,7 +447,7 @@ var FarmTowers = /** @class */ (function (_super) {
                         _d.label = 11;
                     case 11: return [3 /*break*/, 13];
                     case 12:
-                        if (e_4) throw e_4.error;
+                        if (e_3) throw e_3.error;
                         return [7 /*endfinally*/];
                     case 13: return [7 /*endfinally*/];
                     case 14:

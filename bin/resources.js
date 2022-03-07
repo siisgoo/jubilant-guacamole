@@ -79,7 +79,7 @@ var ResourceManager = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
-    ResourceManager.prototype.scrum = function (page) {
+    ResourceManager.prototype.scrap = function (page) {
         return __awaiter(this, void 0, void 0, function () {
             var sel, _a, _b, _c, _d, _e, _f, _g;
             return __generator(this, function (_h) {

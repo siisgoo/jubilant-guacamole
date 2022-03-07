@@ -14,5 +14,5 @@ export declare class ResourceManager {
     get ArenaPoints(): number;
     get FieldsPoints(): number;
     get TalentPoints(): number;
-    scrum(page: puppeteer.Page): Promise<void>;
+    scrap(page: puppeteer.Page): Promise<void>;
 }

@@ -1,8 +1,8 @@
-import * as puppeteer from 'puppeteer';
-export declare type StorageType = 'Rack' | 'Store' | 'Equipment';
-export declare type ItemType = 'Helmet' | 'Braclet' | 'Armor' | 'Medal' | 'Boots' | 'Sword' | 'Underwear';
+export declare type StorageType = 'Unknown' | 'Rack' | 'Store' | 'Equipment';
+declare let ItemTypeArray: string[];
+export declare type ItemType = typeof ItemTypeArray[number];
 export declare type Rarity = "unknown" | "epic" | "rare" | "green" | "cooper";
-export declare type ItemAssign = "Personal" | "New";
+export declare type ItemAssign = "Personal" | "New" | "Trophy";
 export interface Item {
     level: number;
     assign: ItemAssign;
@@ -13,10 +13,4 @@ export interface Item {
     type: ItemType;
     rarity: Rarity;
 }
-export declare let ItemManager: {
-    scrum: (page: puppeteer.Page) => Promise<void>;
-    getItems: () => Item[];
-    clear: () => void;
-    repair: () => Promise<void>;
-    breakAll: (lvl: number) => Promise<void>;
-};
+export {};

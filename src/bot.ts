@@ -1,5 +1,5 @@
 import * as puppeteer from 'puppeteer'
-import { Item, ItemManager, Rarity } from './items.js';
+import { Item, Rarity } from './items.js';
 import { logMessage, LoggingLevel, randomizeSleep, sleep } from './utils.js';
 import { ResourceManager } from './resources.js';
 import * as Farm  from './farm.js';
@@ -39,21 +39,14 @@ export interface BotSettings {
     stepInterval: number;
     randomize:    number;
 
-    auth:    BotAuthSettings;
     session: BotSessionSettings;
     items:   BotItemsSettings;
     farm:    BotFarmSettings;
 };
 
 const DefaulBotSettings: BotSettings = {
-    stepInterval:      500,
+    stepInterval:      800, // dont touch plz
     randomize:         1500,
-
-    // use it split?
-    auth: {
-        login: "",
-        password: "",
-    },
 
     session: {
         sessionTime:       1000*60*60,
@@ -79,6 +72,14 @@ export type Ability      = "Berserk" | "Dodge" | "Egergy shild" | "Stone shild" 
 export type ConflictSide = "South" | "North";
 export type HeroClass    = "Fighter" | "Healer";
 
+//
+// Signals:
+//  'logined'
+//  'login_failed'
+//  'ready'
+//  'started'
+//  'stoped'
+//  'Resting'
 export class HeroBot extends EventEmitter {
     private running:   boolean;
     private inited:    boolean;
@@ -99,16 +100,40 @@ export class HeroBot extends EventEmitter {
 
     public strategy: Farm.AvalibleStrategy_t;
 
-    private resetTimer;
+    private resetTimer: NodeJS.Timeout;
+    private farmTimer: NodeJS.Timeout;
+
+    private sessionTimer: NodeJS.Timeout;
+    private sessionResumeTimer: NodeJS.Timeout;
+
+    get Page()         { return this.page; }
+    get ConflictSide() { return this.conflictSide; }
+    get Level()        { return this.level; }
+    get Resources()    { return this.resources; }
 
     constructor(private page: puppeteer.Page,
-        l_settings)
+                private login,
+                private password,
+                l_settings)
     {
         super();
         this.running = false;
         this.inited = false;
         this.settings = { ...DefaulBotSettings, ...l_settings };
 
+        this.sessionTimer = setTimeout(this.onSessionRunout,
+                                       this.settings.session.sessionTime);
+
+        this.Init();
+    }
+
+
+
+    deconstructor() {
+        this.Dispose(); // its asynk, ok?
+    }
+
+    public Init() {
         this.once('logined', () => {
             this.scrapHeroInfo();
         })
@@ -125,16 +150,18 @@ export class HeroBot extends EventEmitter {
         this.doLogin();
     }
 
-    deconstructor() {
-        this.Dispose(); // its asynk, ok?
+    private async onSessionRunout() {
+        this.Stop();
+        this.Dispose();
+        this.sessionResumeTimer = setTimeout(() =>
+            {
+                this.Init();
+                this.once('ready', this.Run);
+            },
+            this.settings.session.sessionResumeTime);
     }
 
-    get Page() { return this.page; }
-
-    get ConflictSide() { return this.conflictSide; }
-    get Level()     { return this.level; }
-    get Resources() { return this.resources; }
-
+    // Main bot loop
     private async farmLoop(instance: HeroBot, preferedObjective: Farm.FarmStrategy) {
         await Promise.all([
             preferedObjective.execute(instance.settings.farm.settings,
@@ -142,7 +169,7 @@ export class HeroBot extends EventEmitter {
         ]);
 
         if (instance.running === true) {
-            await setTimeout(instance.farmLoop,
+            instance.farmTimer = await setTimeout(instance.farmLoop,
                        randomizeSleep(instance.settings.stepInterval, instance.settings.randomize),
                        instance, preferedObjective);
         } else {
@@ -169,10 +196,6 @@ export class HeroBot extends EventEmitter {
 
         let obj = Farm.Strategies.get(this.settings.farm.objective)
         await obj.Initialize(this);
-
-        await ItemManager.scrap(this.page);
-        console.log(ItemManager.getItems());
-        await sleep(100000);
 
         obj.on('NeedRest', (farmObj: Farm.FarmStrategy) =>
             {
@@ -212,17 +235,23 @@ export class HeroBot extends EventEmitter {
         }
     }
 
+    // Close page and set bot object state as uninited
     public async Dispose() {
         this.inited = false;
-        await this.Stop();
+        this.running = false;
         await this.page.close();
     }
 
+    // Stop main bot loop
+    // Imidiatly stops rest timer
+    // but dont interapt farm step
+    // for get real state of bot, listen 'stoped' signal
     public Stop() {
         this.running = false;
         clearInterval(this.resetTimer);
     }
 
+    // Scrap hp and energy
     public async scrapCurentHeroStats(): Promise<{health: number, energy: number}> {
         return await this.page.$$eval('table > tbody > tr > td > span', (vals) =>
             vals.map((val)=>Number(val.textContent)))
@@ -231,6 +260,7 @@ export class HeroBot extends EventEmitter {
             });
     }
 
+    // Scrap all hero stats exclude invinitory and resources info
     public async scrapHeroInfo(): Promise<void> {
         try {
             await this.page.goto(url.main_menu); //exit from fight handle
@@ -273,9 +303,6 @@ export class HeroBot extends EventEmitter {
             // level
             this.level = await this.page.$$eval('div > b > span', (spans) => Number(spans[1].textContent));
 
-            // items
-            // await this.items.Update();
-
             this.emit('hero_info_scraped');
 
         } catch (err) {
@@ -285,20 +312,21 @@ export class HeroBot extends EventEmitter {
         }
     }
 
+    // Login
     private async doLogin() {
         try {
             await this.page.goto(url.login, {waitUntil: 'load'});
 
             await this.page.waitForSelector('input[value="Войти"]')
                 .then(() => this.page.focus('input[name="login"]'))
-                .then(() => this.page.type('input[name="login"]', this.settings.auth.login))
+                .then(() => this.page.type('input[name="login"]', this.login))
                 .then(() => this.page.focus('input[name="password"]'))
-                .then(() => this.page.type('input[name="password"]', this.settings.auth.password))
+                .then(() => this.page.type('input[name="password"]', this.password))
                 .then(() => this.page.click('input[value="Войти"]'))
-                .then(() => this.page.waitForTimeout(1000))
+                // .then(() => this.page.waitForTimeout(1000))
                 .then(async () =>
                 {
-                    await this.page.waitForSelector('a[href="user"]', { visible: true, timeout: 3000 })
+                    await this.page.waitForSelector('a[href="user"]', { visible: true, timeout: 10000 })
                         .then(() => {
                             this.emit('logined');
                         })

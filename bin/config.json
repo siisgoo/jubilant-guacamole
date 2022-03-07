@@ -1,33 +1,42 @@
 {
     "accounts": [
         {
-            "auth": {
-                "login": "siisgoo",
-                "password": "filso78gpk"
-            },
-            "session": {
-                "sessionTime": 3600000,
-                "sessionResumeTime": 1800000
-            },
-            "items": {
-                "useBottle": true,
-                "breakItems": true,
-                "breakLevel": 5,
-                "breakRarity": "green"
-            },
-            "farm": {
-                "objective": "Towers",
-                "settings": "Auto"
+            "login": "siisgoo",
+            "password": "filso78gpk",
+            "settings": {
+                "session": {
+                    "sessionTime": 3600000,
+                    "sessionResumeTime": 1800000
+                },
+                "items": {
+                    "useBottle": true,
+                    "breakItems": true,
+                    "breakLevel": 5,
+                    "breakRarity": "green"
+                },
+                "farm": {
+                    "objective": "Towers",
+                    "settings": "Auto"
+                }
             }
+        },
+        {
+            "login": "nexros",
+            "password": "53x0n7h3Be@ch",
+            "settings": {}
         }
     ],
     "config": {
         "puppeteer": {
-            "Chromium": "/usr/bin/chromium",
-            "headless": false
+            "headless": false,
+            "args": [
+                "--no-sandbox",
+                "--disable-setuid-sandbox",
+                "--disable-dev-shm-usage"
+            ]
         },
         "multyAccount": {
-            "parallelismPolicy": "MultyBrowser",
+            "parallelismPolicy": "Sequential",
             "settings": ""
         },
         "log_level": "Trace",

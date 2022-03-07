@@ -51,7 +51,7 @@ export class FarmTowers extends EventEmitter implements FarmStrategy {
     async Initialize(bot: HeroBot) {
         this.bot = bot;
         await bot.Page.goto(url.fight.towers, {waitUntil: 'domcontentloaded'});
-        await this.bot.Page.waitForSelector('div > a', { timeout: 30000, visible: true });
+        await this.bot.Page.waitForSelector('div > a', { timeout: 10000, visible: true });
         this.locations = new Map;
         this.fightButtons = new Map;
     }
@@ -72,14 +72,14 @@ export class FarmTowers extends EventEmitter implements FarmStrategy {
                 throw new Error("No nawigation buttions");
             }
 
-            let indicators = await this.bot.Page.$$('a > img');
-            for await (let ind of indicators) {
-                let src = await ind.getProperty('src').then(e => e.jsonValue());
+            // let indicators = await this.bot.Page.$$('a > img');
+            // for await (let ind of indicators) {
+            //     let src = await ind.getProperty('src').then(e => e.jsonValue());
 
-                if (src == "/images/icons/bag_better.gif") {
-                    this.emit('RackBetter');
-                }
-            }
+            //     if (src == "/images/icons/bag_better.gif") {
+            //         this.emit('RackBetter');
+            //     }
+            // }
 
             if (stats.energy === 0 || stats.health === 0) {
                 logMessage("Low health or energy", LoggingLevel.Trace);
@@ -129,7 +129,7 @@ export class FarmTowers extends EventEmitter implements FarmStrategy {
                 logMessage("Hitting...");
                 await SmartClick(this.fightButtons.get('Hit'))
             }
-            this.bot.Page.waitForNetworkIdle({timeout: 5000});
+            this.bot.Page.waitForNetworkIdle({timeout: 10000});
 
             this.sel.clear();
             logMessage("End fight step" + '\n')

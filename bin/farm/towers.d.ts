@@ -20,9 +20,9 @@ export declare class FarmTowers extends EventEmitter implements FarmStrategy {
     Initialize(bot: HeroBot): Promise<void>;
     execute(settings: TowersFarmSettings, itemSettings: BotItemsSettings): Promise<void>;
     private heroPreferedLocation;
-    private scrumContext;
-    private scrumNearLocations;
+    private scrapContext;
+    private scrapNearLocations;
     private goToLocation;
-    private scrumFightButtons;
+    private scrapFightButtons;
     private useBottle;
 }
