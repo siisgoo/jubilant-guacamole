@@ -3,6 +3,7 @@ log*
 bin/
 bin/*
 *.tmp
+log
 TODO
 
 # Logs
