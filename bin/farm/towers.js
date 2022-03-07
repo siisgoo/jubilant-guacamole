@@ -220,32 +220,30 @@ var FarmTowers = /** @class */ (function (_super) {
     FarmTowers.prototype.heroPreferedLocation = function () {
         var ret;
         var level = this.bot.Level;
-        if (level < 8) {
-            ret = TowerLocs[3];
-        }
-        else if (level < 14) {
-            ret = TowerLocs[4];
-        }
-        else if (level < 19) {
-            ret = TowerLocs[5];
-        }
-        else if (level < 25) {
-            ret = TowerLocs[6];
-        }
-        else if (level < 33) {
-            ret = TowerLocs[7];
-        }
-        else if (level < 41) {
-            ret = TowerLocs[8];
-        }
-        else if (level < 51) {
+        console.log(level);
+        if (level > 44) {
             ret = TowerLocs[9];
         }
-        else if (level < 66) {
-            ret = TowerLocs[10];
+        else if (level > 39) {
+            ret = TowerLocs[8];
         }
-        else if (level < 86) {
-            ret = TowerLocs[11];
+        else if (level > 30) {
+            ret = TowerLocs[7];
+        }
+        else if (level > 19) {
+            ret = TowerLocs[6];
+        }
+        else if (level > 13) {
+            ret = TowerLocs[5];
+        }
+        else if (level > 8) {
+            ret = TowerLocs[4];
+        }
+        else if (level > 2) {
+            ret = TowerLocs[3];
+        }
+        else if (level > 0) {
+            ret = TowerLocs[2];
         }
         else {
             throw new Error("Passed level: " + level + " not in avalible range");

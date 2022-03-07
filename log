@@ -2851,3 +2851,980 @@
 [16:09:00] - Run in multi-account mode
 [16:09:01] - Account "undefined" has been logined successfuly
 [16:09:02] - Error: Navigation failed because browser has disconnected!
+[16:13:07] - Start jubilant-guacamole in sequental multi-account policy
+[16:13:08] - Run in multi-account mode
+[16:13:09] - Account "undefined" has been logined successfuly
+[16:13:10] - Bot running with step interval: 800 randomized by: 1500
+[16:13:10] - Start fight step
+[16:13:10] - {"health":174,"energy":150}
+[16:13:10] - Scrumming context
+[16:13:10] - Scrumming nearby locations
+[16:13:10] - Going from capital...
+[16:13:10] - Going to other location
+[16:13:12] - Start fight step
+[16:13:12] - {"health":174,"energy":150}
+[16:13:12] - Scrumming context
+[16:13:12] - Scrum fight buttons
+[16:13:12] - Activating berserk ability...
+[16:13:12] - End fight step
+
+[16:13:13] - Start fight step
+[16:13:13] - {"health":174,"energy":100}
+[16:13:13] - Scrumming context
+[16:13:13] - Scrum fight buttons
+[16:13:13] - Hitting enemy...
+[16:13:13] - End fight step
+
+[16:13:15] - Start fight step
+[16:13:15] - {"health":174,"energy":80}
+[16:13:15] - Scrumming context
+[16:13:15] - Scrum fight buttons
+[16:13:15] - Hitting enemy...
+[16:13:15] - End fight step
+
+[16:13:16] - Start fight step
+[16:13:16] - {"health":174,"energy":55}
+[16:13:16] - Scrumming context
+[16:13:16] - Scrum fight buttons
+[16:13:16] - Hitting enemy...
+[16:13:16] - End fight step
+
+[16:13:18] - Start fight step
+[16:13:18] - {"health":174,"energy":29}
+[16:13:18] - Scrumming context
+[16:13:18] - Scrum fight buttons
+[16:13:18] - Hitting enemy...
+[16:13:18] - End fight step
+
+[16:13:20] - Start fight step
+[16:13:20] - {"health":174,"energy":13}
+[16:13:20] - Scrumming context
+[16:13:20] - Scrum fight buttons
+[16:13:20] - Hitting enemy...
+[16:13:20] - End fight step
+
+[16:13:21] - Start fight step
+[16:13:21] - {"health":174,"energy":0}
+[16:13:21] - Scrumming context
+[16:13:21] - Low health or energy
+[16:13:21] - Trying use bottle
+[16:13:21] - No bottle charges, go rest
+[16:13:21] - Health is low, resting...
+[16:13:21] - Stoping farming
+[16:13:21] - Start resting for: 57080
+[16:13:22] - Account "undefined" has been logined successfuly
+[16:13:22] - Bot running with step interval: 800 randomized by: 1500
+[16:13:23] - Start fight step
+[16:13:23] - {"health":384,"energy":277}
+[16:13:23] - Scrumming context
+[16:13:23] - Scrumming nearby locations
+[16:13:23] - Going from capital...
+[16:13:23] - Going to other location
+[16:13:24] - Start fight step
+[16:13:24] - {"health":384,"energy":277}
+[16:13:24] - Scrumming context
+[16:13:24] - Scrumming nearby locations
+[16:13:24] - Going from capital...
+[16:13:24] - Going to other location
+[16:13:25] - Start fight step
+[16:13:25] - {"health":384,"energy":277}
+[16:13:25] - Scrumming context
+[16:13:25] - Scrumming nearby locations
+[16:13:25] - Going from capital...
+[16:13:25] - Going to other location
+[16:13:28] - Start fight step
+[16:13:28] - {"health":384,"energy":277}
+[16:13:28] - Scrumming context
+[16:13:28] - Scrumming nearby locations
+[16:13:28] - Going from capital...
+[16:13:28] - Going to other location
+[16:13:30] - Start fight step
+[16:13:30] - {"health":384,"energy":277}
+[16:13:30] - Scrumming context
+[16:13:30] - Scrumming nearby locations
+[16:13:30] - Going from capital...
+[16:13:30] - Going to other location
+[16:13:31] - Start fight step
+[16:13:31] - {"health":384,"energy":277}
+[16:13:31] - Scrumming context
+[16:13:31] - Scrumming nearby locations
+[16:13:31] - Going from capital...
+[16:13:31] - Going to other location
+[16:13:33] - Start fight step
+[16:13:33] - {"health":384,"energy":277}
+[16:13:33] - Scrumming context
+[16:13:33] - Scrumming nearby locations
+[16:13:34] - Going from capital...
+[16:13:34] - Going to other location
+[16:13:35] - Start fight step
+[16:13:35] - {"health":384,"energy":277}
+[16:13:35] - Scrumming context
+[16:13:35] - Scrumming nearby locations
+[16:13:35] - Going from capital...
+[16:13:35] - Going to other location
+[16:13:36] - Start fight step
+[16:13:36] - {"health":384,"energy":277}
+[16:13:36] - Scrumming context
+[16:13:36] - Scrumming nearby locations
+[16:13:36] - Going from capital...
+[16:13:36] - Going to other location
+[16:13:38] - Start fight step
+[16:13:38] - {"health":384,"energy":277}
+[16:13:38] - Scrumming context
+[16:13:38] - Scrumming nearby locations
+[16:13:38] - Going from capital...
+[16:13:38] - Going to other location
+[16:13:39] - Start fight step
+[16:13:39] - {"health":384,"energy":277}
+[16:13:39] - Scrumming context
+[16:13:39] - Scrumming nearby locations
+[16:13:39] - Going from capital...
+[16:13:39] - Going to other location
+[16:13:40] - Start fight step
+[16:13:40] - {"health":384,"energy":277}
+[16:13:40] - Scrumming context
+[16:13:40] - Scrumming nearby locations
+[16:13:40] - Going from capital...
+[16:13:40] - Going to other location
+[16:13:43] - Start fight step
+[16:13:43] - {"health":384,"energy":277}
+[16:13:43] - Scrumming context
+[16:13:43] - Scrumming nearby locations
+[16:13:43] - Going from capital...
+[16:13:43] - Going to other location
+[16:13:45] - Start fight step
+[16:13:45] - {"health":384,"energy":277}
+[16:13:45] - Scrumming context
+[16:13:45] - Scrumming nearby locations
+[16:13:45] - Going from capital...
+[16:13:45] - Going to other location
+[16:13:47] - Start fight step
+[16:13:47] - Error: Protocol error (Runtime.evaluate): Session closed. Most likely the page has been closed.
+[16:53:35] - Start jubilant-guacamole in sequental multi-account policy
+[16:53:36] - Run in multi-account mode
+[16:53:37] - Account "undefined" has been logined successfuly
+[16:53:38] - Bot running with step interval: 800 randomized by: 1500
+[16:53:38] - Start fight step
+[16:53:38] - {"health":174,"energy":150}
+[16:53:38] - Scrumming context
+[16:53:38] - Scrumming nearby locations
+[16:53:38] - Going from capital...
+[16:53:38] - Going to other location
+[16:53:40] - Start fight step
+[16:53:40] - {"health":174,"energy":150}
+[16:53:40] - Scrumming context
+[16:53:40] - Scrum fight buttons
+[16:53:40] - Activating berserk ability...
+[16:53:40] - End fight step
+
+[16:53:42] - Start fight step
+[16:53:42] - {"health":174,"energy":100}
+[16:53:42] - Scrumming context
+[16:53:42] - Scrum fight buttons
+[16:53:42] - Hitting enemy...
+[16:53:42] - End fight step
+
+[16:53:44] - Start fight step
+[16:53:44] - {"health":174,"energy":76}
+[16:53:44] - Scrumming context
+[16:53:44] - Scrum fight buttons
+[16:53:44] - Hitting enemy...
+[16:53:44] - End fight step
+
+[16:53:46] - Start fight step
+[16:53:46] - {"health":174,"energy":51}
+[16:53:46] - Scrumming context
+[16:53:46] - Scrum fight buttons
+[16:53:46] - Hitting enemy...
+[16:53:46] - End fight step
+
+[16:53:48] - Start fight step
+[16:53:48] - {"health":174,"energy":26}
+[16:53:48] - Scrumming context
+[16:53:48] - Scrum fight buttons
+[16:53:48] - Hitting enemy...
+[16:53:48] - End fight step
+
+[16:53:49] - Start fight step
+[16:53:49] - {"health":174,"energy":2}
+[16:53:49] - Scrumming context
+[16:53:49] - Scrum fight buttons
+[16:53:49] - Hitting enemy...
+[16:53:49] - End fight step
+
+[16:53:50] - Start fight step
+[16:53:50] - {"health":174,"energy":0}
+[16:53:50] - Scrumming context
+[16:53:50] - Low health or energy
+[16:53:50] - Trying use bottle
+[16:53:50] - No bottle charges, go rest
+[16:53:50] - Health is low, resting...
+[16:53:50] - Stoping farming
+[16:53:51] - Start resting for: 57636
+[16:53:52] - Account "undefined" has been logined successfuly
+[16:53:52] - Bot running with step interval: 800 randomized by: 1500
+[16:53:52] - Start fight step
+[16:53:52] - {"health":384,"energy":277}
+[16:53:52] - Scrumming context
+[16:53:52] - Scrumming nearby locations
+[16:53:52] - Going from capital...
+[16:53:52] - Error: Cannot go to location
+[16:53:57] - Start jubilant-guacamole in sequental multi-account policy
+[16:53:57] - Run in multi-account mode
+[16:53:58] - Account "undefined" has been logined successfuly
+[16:54:00] - Bot running with step interval: 800 randomized by: 1500
+[16:54:00] - Start fight step
+[16:54:00] - {"health":174,"energy":34}
+[16:54:00] - Scrumming context
+[16:54:00] - Scrumming nearby locations
+[16:54:00] - Going from capital...
+[16:54:00] - Going to other location
+[16:54:01] - Start fight step
+[16:54:01] - {"health":174,"energy":34}
+[16:54:01] - Scrumming context
+[16:54:01] - Scrum fight buttons
+[16:54:01] - Hitting...
+[16:54:01] - End fight step
+
+[16:54:02] - Start fight step
+[16:54:02] - {"health":174,"energy":0}
+[16:54:02] - Scrumming context
+[16:54:02] - Low health or energy
+[16:54:02] - Trying use bottle
+[16:54:02] - No bottle charges, go rest
+[16:54:02] - Health is low, resting...
+[16:54:02] - Stoping farming
+[16:54:03] - Start resting for: 56557
+[16:54:05] - Account "undefined" has been logined successfuly
+[16:54:05] - Bot running with step interval: 800 randomized by: 1500
+[16:54:05] - Start fight step
+[16:54:05] - {"health":384,"energy":277}
+[16:54:05] - Scrumming context
+[16:54:05] - Scrumming nearby locations
+[16:54:05] - Going from capital...
+[16:54:05] - Error: Cannot go to location
+[16:59:21] - Start jubilant-guacamole in sequental multi-account policy
+[16:59:21] - Run in multi-account mode
+[16:59:23] - Account "undefined" has been logined successfuly
+[16:59:24] - Bot running with step interval: 800 randomized by: 1500
+[16:59:24] - Start fight step
+[16:59:24] - {"health":174,"energy":150}
+[16:59:24] - Scrumming context
+[16:59:24] - Scrumming nearby locations
+[16:59:24] - Going from capital...
+[16:59:24] - Going to other location
+[16:59:25] - Start fight step
+[16:59:25] - {"health":174,"energy":150}
+[16:59:25] - Scrumming context
+[16:59:25] - Scrum fight buttons
+[16:59:25] - Activating berserk ability...
+[16:59:25] - End fight step
+
+[16:59:27] - Start fight step
+[16:59:27] - {"health":174,"energy":100}
+[16:59:27] - Scrumming context
+[16:59:27] - Scrum fight buttons
+[16:59:27] - Hitting enemy...
+[16:59:27] - End fight step
+
+[16:59:28] - Start fight step
+[16:59:28] - {"health":174,"energy":79}
+[16:59:28] - Scrumming context
+[16:59:28] - Scrum fight buttons
+[16:59:28] - Hitting enemy...
+[16:59:28] - End fight step
+
+[16:59:30] - Start fight step
+[16:59:30] - {"health":174,"energy":57}
+[16:59:30] - Scrumming context
+[16:59:30] - Scrum fight buttons
+[16:59:30] - Hitting enemy...
+[16:59:30] - End fight step
+
+[16:59:32] - Start fight step
+[16:59:32] - {"health":174,"energy":32}
+[16:59:32] - Scrumming context
+[16:59:32] - Scrum fight buttons
+[16:59:32] - Hitting enemy...
+[16:59:32] - End fight step
+
+[16:59:34] - Start fight step
+[16:59:34] - {"health":174,"energy":9}
+[16:59:34] - Scrumming context
+[16:59:34] - Scrum fight buttons
+[16:59:34] - Hitting enemy...
+[16:59:34] - End fight step
+
+[16:59:36] - Start fight step
+[16:59:36] - {"health":174,"energy":0}
+[16:59:36] - Scrumming context
+[16:59:36] - Low health or energy
+[16:59:36] - Trying use bottle
+[16:59:36] - No bottle charges, go rest
+[16:59:36] - Health is low, resting...
+[16:59:36] - Stoping farming
+[16:59:36] - Start resting for: 57113
+[16:59:37] - Account "undefined" has been logined successfuly
+[16:59:37] - Bot running with step interval: 800 randomized by: 1500
+[16:59:37] - Start fight step
+[16:59:38] - {"health":384,"energy":277}
+[16:59:38] - Scrumming context
+[16:59:38] - Scrumming nearby locations
+[16:59:38] - Going from capital...
+[16:59:38] - Error: Cannot go to location
+[17:00:37] - Start jubilant-guacamole in sequental multi-account policy
+[17:00:37] - Run in multi-account mode
+[17:00:39] - Account "undefined" has been logined successfuly
+[17:00:40] - Bot running with step interval: 800 randomized by: 1500
+[17:00:40] - Start fight step
+[17:00:40] - {"health":174,"energy":150}
+[17:00:40] - Scrumming context
+[17:00:40] - Scrumming nearby locations
+[17:00:40] - Going from capital...
+[17:00:40] - Going to other location
+[17:00:42] - Start fight step
+[17:00:42] - {"health":174,"energy":150}
+[17:00:42] - Scrumming context
+[17:00:42] - Scrum fight buttons
+[17:00:42] - Activating berserk ability...
+[17:00:42] - End fight step
+
+[17:00:44] - Start fight step
+[17:00:44] - {"health":174,"energy":100}
+[17:00:44] - Scrumming context
+[17:00:44] - Scrum fight buttons
+[17:00:44] - Hitting enemy...
+[17:00:44] - End fight step
+
+[17:00:45] - Start fight step
+[17:00:45] - {"health":174,"energy":75}
+[17:00:45] - Scrumming context
+[17:00:45] - Scrum fight buttons
+[17:00:45] - Hitting enemy...
+[17:00:45] - End fight step
+
+[17:00:47] - Start fight step
+[17:00:47] - {"health":174,"energy":54}
+[17:00:47] - Scrumming context
+[17:00:47] - Scrum fight buttons
+[17:00:47] - Hitting enemy...
+[17:00:47] - End fight step
+
+[17:00:48] - Start fight step
+[17:00:48] - {"health":174,"energy":29}
+[17:00:48] - Scrumming context
+[17:00:48] - Scrum fight buttons
+[17:00:48] - Hitting enemy...
+[17:00:48] - End fight step
+
+[17:00:50] - Start fight step
+[17:00:50] - {"health":174,"energy":4}
+[17:00:50] - Scrumming context
+[17:00:50] - Scrum fight buttons
+[17:00:50] - Hitting enemy...
+[17:00:50] - End fight step
+
+[17:00:52] - Start fight step
+[17:00:52] - {"health":174,"energy":0}
+[17:00:52] - Scrumming context
+[17:00:52] - Low health or energy
+[17:00:52] - Trying use bottle
+[17:00:52] - No bottle charges, go rest
+[17:00:52] - Health is low, resting...
+[17:00:52] - Stoping farming
+[17:00:52] - Start resting for: 56737
+[17:00:53] - Account "undefined" has been logined successfuly
+[17:00:53] - Bot running with step interval: 800 randomized by: 1500
+[17:00:54] - Start fight step
+[17:00:54] - {"health":384,"energy":277}
+[17:00:54] - Scrumming context
+[17:00:54] - Scrumming nearby locations
+[17:00:54] - Going from capital...
+[17:00:54] - Error: Cannot go to location
+[17:01:25] - Start jubilant-guacamole in sequental multi-account policy
+[17:01:25] - Run in multi-account mode
+[17:01:27] - Account "undefined" has been logined successfuly
+[17:01:28] - Bot running with step interval: 800 randomized by: 1500
+[17:01:28] - Start fight step
+[17:01:28] - {"health":174,"energy":121}
+[17:01:28] - Scrumming context
+[17:01:28] - Scrumming nearby locations
+[17:01:28] - Going from capital...
+[17:01:28] - Going to other location
+[17:01:29] - Start fight step
+[17:01:29] - {"health":174,"energy":122}
+[17:01:29] - Scrumming context
+[17:01:29] - Scrum fight buttons
+[17:01:29] - Activating berserk ability...
+[17:01:29] - End fight step
+
+[17:01:31] - Start fight step
+[17:01:31] - {"health":174,"energy":77}
+[17:01:31] - Scrumming context
+[17:01:31] - Scrum fight buttons
+[17:01:31] - Hitting enemy...
+[17:01:31] - End fight step
+
+[17:01:33] - Start fight step
+[17:01:33] - {"health":174,"energy":53}
+[17:01:33] - Scrumming context
+[17:01:33] - Scrum fight buttons
+[17:01:33] - Hitting enemy...
+[17:01:33] - End fight step
+
+[17:01:34] - Start fight step
+[17:01:34] - {"health":174,"energy":31}
+[17:01:34] - Scrumming context
+[17:01:34] - Scrum fight buttons
+[17:01:34] - Hitting enemy...
+[17:01:34] - End fight step
+
+[17:01:36] - Start fight step
+[17:01:36] - {"health":174,"energy":8}
+[17:01:36] - Scrumming context
+[17:01:36] - Scrum fight buttons
+[17:01:36] - Hitting enemy...
+[17:01:36] - End fight step
+
+[17:01:37] - Start fight step
+[17:01:37] - {"health":174,"energy":0}
+[17:01:37] - Scrumming context
+[17:01:37] - Low health or energy
+[17:01:37] - Trying use bottle
+[17:01:37] - No bottle charges, go rest
+[17:01:37] - Health is low, resting...
+[17:01:37] - Stoping farming
+[17:01:38] - Start resting for: 57559
+[17:01:40] - Account "undefined" has been logined successfuly
+[17:01:40] - Bot running with step interval: 800 randomized by: 1500
+[17:01:40] - Start fight step
+[17:01:40] - {"health":384,"energy":277}
+[17:01:40] - Scrumming context
+[17:01:40] - Scrumming nearby locations
+[17:01:40] - Going from capital...
+[17:01:40] - Error: Cannot go to location
+[17:04:18] - Start jubilant-guacamole in sequental multi-account policy
+[17:04:19] - Run in multi-account mode
+[17:04:20] - Account "undefined" has been logined successfuly
+[17:04:22] - Bot running with step interval: 800 randomized by: 1500
+[17:04:22] - Start fight step
+[17:04:22] - {"health":174,"energy":150}
+[17:04:22] - Scrumming context
+[17:04:22] - Scrumming nearby locations
+[17:04:22] - Going from capital...
+[17:04:22] - Going to other location
+[17:04:23] - Start fight step
+[17:04:23] - {"health":174,"energy":150}
+[17:04:23] - Scrumming context
+[17:04:23] - Scrum fight buttons
+[17:04:23] - Activating berserk ability...
+[17:04:23] - End fight step
+
+[17:04:24] - Start fight step
+[17:04:24] - {"health":174,"energy":100}
+[17:04:24] - Scrumming context
+[17:04:24] - Scrum fight buttons
+[17:04:24] - Hitting enemy...
+[17:04:24] - End fight step
+
+[17:04:27] - Start fight step
+[17:04:27] - {"health":174,"energy":81}
+[17:04:27] - Scrumming context
+[17:04:27] - Scrum fight buttons
+[17:04:27] - Hitting enemy...
+[17:04:27] - End fight step
+
+[17:04:29] - Start fight step
+[17:04:29] - {"health":174,"energy":54}
+[17:04:29] - Scrumming context
+[17:04:29] - Scrum fight buttons
+[17:04:29] - Hitting enemy...
+[17:04:29] - End fight step
+
+[17:04:31] - Start fight step
+[17:04:31] - {"health":174,"energy":29}
+[17:04:31] - Scrumming context
+[17:04:31] - Scrum fight buttons
+[17:04:31] - Hitting enemy...
+[17:04:31] - End fight step
+
+[17:04:32] - Start fight step
+[17:04:32] - {"health":174,"energy":5}
+[17:04:32] - Scrumming context
+[17:04:32] - Scrum fight buttons
+[17:04:32] - Hitting enemy...
+[17:04:32] - End fight step
+
+[17:04:33] - Start fight step
+[17:04:33] - {"health":174,"energy":0}
+[17:04:33] - Scrumming context
+[17:04:33] - Low health or energy
+[17:04:33] - Trying use bottle
+[17:04:33] - No bottle charges, go rest
+[17:04:33] - Health is low, resting...
+[17:04:33] - Stoping farming
+[17:04:34] - Start resting for: 56977
+[17:04:34] - Account "undefined" has been logined successfuly
+[17:04:35] - Bot running with step interval: 800 randomized by: 1500
+[17:04:35] - Start fight step
+[17:04:35] - {"health":384,"energy":277}
+[17:04:35] - Scrumming context
+[17:04:35] - Scrumming nearby locations
+[17:04:35] - Going from capital...
+[17:04:35] - Going to other location
+[17:04:37] - Start fight step
+[17:04:37] - {"health":384,"energy":277}
+[17:04:37] - Scrumming context
+[17:04:37] - Scrumming nearby locations
+[17:04:37] - Going from capital...
+[17:04:37] - Going to other location
+[17:04:39] - Start fight step
+[17:04:39] - {"health":384,"energy":277}
+[17:04:39] - Scrumming context
+[17:04:39] - Scrumming nearby locations
+[17:04:39] - Going from capital...
+[17:04:39] - Going to other location
+[17:04:41] - Start fight step
+[17:04:41] - {"health":384,"energy":277}
+[17:04:41] - Scrumming context
+[17:04:41] - Scrumming nearby locations
+[17:04:41] - Going from capital...
+[17:04:41] - Going to other location
+[17:04:43] - Start fight step
+[17:04:43] - {"health":384,"energy":277}
+[17:04:43] - Scrumming context
+[17:04:43] - Scrumming nearby locations
+[17:04:43] - Going from capital...
+[17:04:43] - Going to other location
+[17:08:30] - Start jubilant-guacamole in sequental multi-account policy
+[17:08:31] - Run in multi-account mode
+[17:08:32] - Account "undefined" has been logined successfuly
+[17:08:33] - Bot running with step interval: 800 randomized by: 1500
+[17:08:33] - Start fight step
+[17:08:33] - {"health":174,"energy":150}
+[17:08:33] - Scrumming context
+[17:08:33] - Scrumming nearby locations
+[17:08:33] - Going from capital...
+[17:08:33] - Going to other location
+[17:08:36] - Start fight step
+[17:08:36] - {"health":174,"energy":150}
+[17:08:36] - Scrumming context
+[17:08:36] - Scrum fight buttons
+[17:08:36] - Activating berserk ability...
+[17:08:36] - End fight step
+
+[17:08:37] - Start fight step
+[17:08:37] - {"health":174,"energy":100}
+[17:08:37] - Scrumming context
+[17:08:37] - Scrum fight buttons
+[17:08:37] - Hitting enemy...
+[17:08:37] - End fight step
+
+[17:08:39] - Start fight step
+[17:08:39] - {"health":174,"energy":79}
+[17:08:39] - Scrumming context
+[17:08:39] - Scrum fight buttons
+[17:08:39] - Hitting enemy...
+[17:08:39] - End fight step
+
+[17:08:41] - Start fight step
+[17:08:41] - {"health":174,"energy":53}
+[17:08:41] - Scrumming context
+[17:08:41] - Scrum fight buttons
+[17:08:41] - Hitting enemy...
+[17:08:41] - End fight step
+
+[17:08:43] - Start fight step
+[17:08:43] - {"health":174,"energy":27}
+[17:08:43] - Scrumming context
+[17:08:43] - Scrum fight buttons
+[17:08:43] - Hitting enemy...
+[17:08:43] - End fight step
+
+[17:08:45] - Start fight step
+[17:08:45] - {"health":174,"energy":7}
+[17:08:45] - Scrumming context
+[17:08:45] - Scrum fight buttons
+[17:08:45] - Hitting enemy...
+[17:08:45] - End fight step
+
+[17:08:47] - Start fight step
+[17:08:47] - {"health":174,"energy":0}
+[17:08:47] - Scrumming context
+[17:08:47] - Low health or energy
+[17:08:47] - Trying use bottle
+[17:08:47] - No bottle charges, go rest
+[17:08:47] - Health is low, resting...
+[17:08:47] - Stoping farming
+[17:08:48] - Start resting for: 56618
+[17:08:48] - Account "undefined" has been logined successfuly
+[17:08:49] - Bot running with step interval: 800 randomized by: 1500
+[17:08:49] - Start fight step
+[17:08:49] - {"health":384,"energy":277}
+[17:08:49] - Scrumming context
+[17:08:49] - Scrumming nearby locations
+[17:08:49] - Going from capital...
+[17:08:49] - Going to other location
+[17:08:50] - Start fight step
+[17:08:50] - {"health":384,"energy":277}
+[17:08:50] - Scrumming context
+[17:08:50] - Scrumming nearby locations
+[17:08:50] - Going from capital...
+[17:08:50] - Going to other location
+[17:08:52] - Start fight step
+[17:08:52] - {"health":384,"energy":277}
+[17:08:52] - Scrumming context
+[17:08:52] - Scrumming nearby locations
+[17:08:52] - Going from capital...
+[17:08:52] - Going to other location
+[17:08:53] - Start fight step
+[17:08:53] - {"health":384,"energy":277}
+[17:08:53] - Scrumming context
+[17:08:53] - Scrumming nearby locations
+[17:08:53] - Going from capital...
+[17:08:53] - Going to other location
+[17:08:56] - Start fight step
+[17:08:56] - {"health":384,"energy":277}
+[17:08:56] - Scrumming context
+[17:08:56] - Scrumming nearby locations
+[17:08:56] - Going from capital...
+[17:08:56] - Going to other location
+[17:08:57] - Start fight step
+[17:08:57] - {"health":384,"energy":277}
+[17:08:57] - Scrumming context
+[17:08:57] - Scrumming nearby locations
+[17:08:57] - Going from capital...
+[17:08:57] - Going to other location
+[17:08:58] - Start fight step
+[17:08:58] - Error: Protocol error (Runtime.evaluate): Session closed. Most likely the page has been closed.
+[17:13:59] - Start jubilant-guacamole in sequental multi-account policy
+[17:13:59] - Run in multi-account mode
+[17:14:00] - Account "undefined" has been logined successfuly
+[17:14:02] - Bot running with step interval: 800 randomized by: 1500
+[17:14:02] - Start fight step
+[17:14:02] - {"health":174,"energy":150}
+[17:14:02] - Scrumming context
+[17:14:02] - Scrumming nearby locations
+[17:14:02] - Going from capital...
+[17:14:02] - Error: Cannot go to location
+[17:15:34] - Start jubilant-guacamole in sequental multi-account policy
+[17:15:34] - Run in multi-account mode
+[17:15:35] - Account "undefined" has been logined successfuly
+[17:15:37] - Bot running with step interval: 800 randomized by: 1500
+[17:15:37] - Start fight step
+[17:15:37] - {"health":174,"energy":150}
+[17:15:37] - Scrumming context
+[17:15:37] - Scrumming nearby locations
+[17:15:37] - Going from capital...
+[17:15:37] - Going to other location
+[17:15:38] - Start fight step
+[17:15:38] - {"health":174,"energy":150}
+[17:15:38] - Scrumming context
+[17:15:38] - Scrum fight buttons
+[17:15:38] - Activating berserk ability...
+[17:15:38] - End fight step
+
+[17:15:39] - Start fight step
+[17:15:39] - {"health":174,"energy":100}
+[17:15:39] - Scrumming context
+[17:15:39] - Scrum fight buttons
+[17:15:39] - Hitting enemy...
+[17:15:40] - End fight step
+
+[17:15:41] - Start fight step
+[17:15:41] - {"health":174,"energy":80}
+[17:15:41] - Scrumming context
+[17:15:41] - Scrum fight buttons
+[17:15:41] - Hitting enemy...
+[17:15:41] - End fight step
+
+[17:15:43] - Start fight step
+[17:15:43] - {"health":174,"energy":56}
+[17:15:43] - Scrumming context
+[17:15:43] - Scrum fight buttons
+[17:15:43] - Hitting enemy...
+[17:15:43] - End fight step
+
+[17:15:44] - Start fight step
+[17:15:44] - {"health":174,"energy":34}
+[17:15:44] - Scrumming context
+[17:15:44] - Scrum fight buttons
+[17:15:44] - Hitting enemy...
+[17:15:44] - End fight step
+
+[17:15:45] - Start fight step
+[17:15:45] - {"health":174,"energy":13}
+[17:15:45] - Scrumming context
+[17:15:45] - Scrum fight buttons
+[17:15:45] - Hitting enemy...
+[17:15:46] - End fight step
+
+[17:15:47] - Start fight step
+[17:15:47] - {"health":174,"energy":0}
+[17:15:47] - Scrumming context
+[17:15:47] - Low health or energy
+[17:15:47] - Trying use bottle
+[17:15:47] - No bottle charges, go rest
+[17:15:47] - Health is low, resting...
+[17:15:47] - Stoping farming
+[17:15:47] - Start resting for: 57603
+[17:15:48] - Account "undefined" has been logined successfuly
+[17:15:49] - Bot running with step interval: 800 randomized by: 1500
+[17:15:49] - Start fight step
+[17:15:49] - {"health":384,"energy":277}
+[17:15:49] - Scrumming context
+[17:15:49] - Scrumming nearby locations
+[17:15:49] - Going from capital...
+[17:15:49] - Going to other location
+[17:15:50] - Start fight step
+[17:15:50] - {"health":384,"energy":277}
+[17:15:50] - Scrumming context
+[17:15:50] - Scrum fight buttons
+[17:15:50] - Activating berserk ability...
+[17:15:51] - End fight step
+
+[17:15:52] - Start fight step
+[17:15:52] - {"health":384,"energy":251}
+[17:15:52] - Scrumming context
+[17:15:52] - Scrum fight buttons
+[17:15:52] - Hitting enemy...
+[17:15:52] - End fight step
+
+[17:15:53] - Start fight step
+[17:15:53] - {"health":384,"energy":236}
+[17:15:53] - Scrumming context
+[17:15:53] - Scrum fight buttons
+[17:15:53] - Hitting enemy...
+[17:15:53] - End fight step
+
+[17:15:55] - Start fight step
+[17:15:55] - {"health":384,"energy":223}
+[17:15:55] - Scrumming context
+[17:15:55] - Scrum fight buttons
+[17:15:55] - Hitting enemy...
+[17:15:55] - End fight step
+
+[17:15:57] - Start fight step
+[17:15:57] - {"health":384,"energy":206}
+[17:15:57] - Scrumming context
+[17:15:57] - Scrum fight buttons
+[17:15:57] - Hitting enemy...
+[17:15:57] - End fight step
+
+[17:15:58] - Start fight step
+[17:15:58] - {"health":384,"energy":191}
+[17:15:58] - Scrumming context
+[17:15:58] - Scrum fight buttons
+[17:15:58] - Hitting enemy...
+[17:15:58] - End fight step
+
+[17:15:59] - Start fight step
+[17:15:59] - {"health":384,"energy":183}
+[17:15:59] - Scrumming context
+[17:15:59] - Scrum fight buttons
+[17:15:59] - Hitting enemy...
+[17:15:59] - End fight step
+
+[17:16:00] - Start fight step
+[17:16:00] - {"health":384,"energy":175}
+[17:16:00] - Scrumming context
+[17:16:00] - Scrum fight buttons
+[17:16:00] - Hitting enemy...
+[17:16:00] - End fight step
+
+[17:16:02] - Start fight step
+[17:16:02] - {"health":384,"energy":167}
+[17:16:02] - Scrumming context
+[17:16:02] - Scrum fight buttons
+[17:16:02] - Hitting enemy...
+[17:16:02] - End fight step
+
+[17:16:03] - Start fight step
+[17:16:03] - {"health":384,"energy":159}
+[17:16:03] - Scrumming context
+[17:16:03] - Scrum fight buttons
+[17:16:03] - Hitting enemy...
+[17:16:03] - End fight step
+
+[17:16:05] - Start fight step
+[17:16:05] - {"health":384,"energy":151}
+[17:16:05] - Scrumming context
+[17:16:05] - Scrum fight buttons
+[17:16:05] - Hitting enemy...
+[17:16:05] - End fight step
+
+[17:16:06] - Start fight step
+[17:16:06] - {"health":384,"energy":143}
+[17:16:06] - Scrumming context
+[17:16:06] - Scrum fight buttons
+[17:16:06] - Hitting enemy...
+[17:16:06] - End fight step
+
+[17:16:08] - Start fight step
+[17:16:08] - {"health":384,"energy":135}
+[17:16:08] - Scrumming context
+[17:16:08] - Scrum fight buttons
+[17:16:08] - Hitting enemy...
+[17:16:08] - End fight step
+
+[17:16:09] - Start fight step
+[17:16:09] - {"health":384,"energy":126}
+[17:16:09] - Scrumming context
+[17:16:09] - Scrum fight buttons
+[17:16:09] - Hitting enemy...
+[17:16:09] - End fight step
+
+[17:16:10] - Start fight step
+[17:16:10] - {"health":384,"energy":118}
+[17:16:10] - Scrumming context
+[17:16:10] - Scrum fight buttons
+[17:16:10] - Hitting enemy...
+[17:16:11] - End fight step
+
+[17:16:12] - Start fight step
+[17:16:12] - {"health":384,"energy":110}
+[17:16:12] - Scrumming context
+[17:16:12] - Scrum fight buttons
+[17:16:12] - Hitting enemy...
+[17:16:12] - End fight step
+
+[17:16:14] - Start fight step
+[17:16:14] - {"health":384,"energy":101}
+[17:16:14] - Scrumming context
+[17:16:14] - Scrum fight buttons
+[17:16:14] - Hitting enemy...
+[17:16:14] - End fight step
+
+[17:16:16] - Start fight step
+[17:16:16] - {"health":384,"energy":93}
+[17:16:16] - Scrumming context
+[17:16:16] - Scrum fight buttons
+[17:16:17] - Hitting enemy...
+[17:16:17] - End fight step
+
+[17:16:18] - Start fight step
+[17:16:18] - {"health":384,"energy":84}
+[17:16:18] - Scrumming context
+[17:16:18] - Scrum fight buttons
+[17:16:18] - Hitting enemy...
+[17:16:18] - End fight step
+
+[17:16:20] - Start fight step
+[17:16:20] - {"health":384,"energy":76}
+[17:16:20] - Scrumming context
+[17:16:20] - Scrum fight buttons
+[17:16:20] - Hitting enemy...
+[17:16:20] - End fight step
+
+[17:16:21] - Start fight step
+[17:16:21] - {"health":384,"energy":67}
+[17:16:21] - Scrumming context
+[17:16:21] - Scrum fight buttons
+[17:16:21] - Hitting enemy...
+[17:16:21] - End fight step
+
+[17:16:23] - Start fight step
+[17:16:23] - {"health":384,"energy":59}
+[17:16:23] - Scrumming context
+[17:16:23] - Scrum fight buttons
+[17:16:23] - Hitting enemy...
+[17:16:23] - End fight step
+
+[17:16:25] - Start fight step
+[17:16:25] - {"health":384,"energy":51}
+[17:16:25] - Scrumming context
+[17:16:25] - Scrum fight buttons
+[17:16:25] - Hitting...
+[17:16:25] - End fight step
+
+[17:16:26] - Start fight step
+[17:16:26] - {"health":384,"energy":42}
+[17:16:26] - Scrumming context
+[17:16:26] - Scrum fight buttons
+[17:16:26] - Hitting enemy...
+[17:16:26] - End fight step
+
+[17:16:27] - Start fight step
+[17:16:27] - {"health":384,"energy":34}
+[17:16:27] - Scrumming context
+[17:16:27] - Scrum fight buttons
+[17:16:27] - Hitting enemy...
+[17:16:28] - End fight step
+
+[17:16:28] - Start fight step
+[17:16:28] - {"health":384,"energy":26}
+[17:16:28] - Scrumming context
+[17:16:28] - Scrum fight buttons
+[17:16:28] - Hitting enemy...
+[17:16:29] - End fight step
+
+[17:16:30] - Start fight step
+[17:16:30] - {"health":384,"energy":19}
+[17:16:30] - Scrumming context
+[17:16:30] - Scrum fight buttons
+[17:16:30] - Hitting enemy...
+[17:16:30] - End fight step
+
+[17:16:32] - Start fight step
+[17:16:32] - {"health":384,"energy":10}
+[17:16:32] - Scrumming context
+[17:16:32] - Scrum fight buttons
+[17:16:32] - Activating berserk ability...
+[17:16:32] - End fight step
+
+[17:16:33] - Start fight step
+[17:16:33] - {"health":384,"energy":3}
+[17:16:33] - Scrumming context
+[17:16:33] - Scrum fight buttons
+[17:16:33] - Hitting enemy...
+[17:16:34] - End fight step
+
+[17:16:35] - Start fight step
+[17:16:35] - {"health":384,"energy":0}
+[17:16:35] - Scrumming context
+[17:16:35] - Low health or energy
+[17:16:35] - Trying use bottle
+[17:16:35] - Using bottle...
+[17:16:35] - Exiging farm for healing
+[17:16:36] - Start fight step
+[17:16:36] - {"health":404,"energy":387}
+[17:16:36] - Scrumming context
+[17:16:36] - Scrum fight buttons
+[17:16:36] - Hitting enemy...
+[17:16:36] - End fight step
+
+[17:16:38] - Start fight step
+[17:16:38] - {"health":404,"energy":374}
+[17:16:38] - Scrumming context
+[17:16:38] - Scrum fight buttons
+[17:16:38] - Hitting enemy...
+[17:16:38] - End fight step
+
+[17:16:39] - Start fight step
+[17:16:39] - {"health":404,"energy":360}
+[17:16:39] - Scrumming context
+[17:16:39] - Scrum fight buttons
+[17:16:39] - Hitting enemy...
+[17:16:39] - End fight step
+
+[17:16:40] - Start fight step
+[17:16:40] - {"health":404,"energy":346}
+[17:16:40] - Scrumming context
+[17:16:40] - Scrum fight buttons
+[17:16:40] - Hitting enemy...
+[17:16:40] - End fight step
+
+[17:16:42] - Start fight step
+[17:16:42] - {"health":404,"energy":334}
+[17:16:42] - Scrumming context
+[17:16:42] - Scrum fight buttons
+[17:16:42] - Hitting enemy...
+[17:16:42] - End fight step
+
+[17:16:44] - Start fight step
+[17:16:44] - {"health":404,"energy":320}
+[17:16:44] - Scrumming context
+[17:16:44] - Scrum fight buttons
+[17:16:44] - Hitting enemy...
+[17:16:44] - End fight step
+
