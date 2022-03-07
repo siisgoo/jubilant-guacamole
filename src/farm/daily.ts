@@ -10,11 +10,18 @@ import { url } from "./../config.json";
 // ░▀░░░▀░▀░▀░▀░▀░▀░░░▀▀░░▀░▀░▀▀▀░▀▀▀░░▀░
 
 export class FarmDaily extends EventEmitter implements FarmStrategy {
+
+    private _callback: StrategyCallback;
+
     async execute(farmSettings: DailyFarmSettings, itemSettings: BotItemsSettings) {
 
     }
 
     async Initialize(bot: HeroBot) {
 
+    }
+
+    get callback(): StrategyCallback {
+        return this._callback;
     }
 }

@@ -48,7 +48,7 @@ export function sleep(ms: number) {
 }
 
 export function randomizeSleep(cur, rand): number {
-    return (cur + Math.random() * (rand)).toFixed();
+    return (cur + Math.random() * (rand - 100) + 100).toFixed();
 }
 
 export async function SmartClick(element: puppeteer.ElementHandle,

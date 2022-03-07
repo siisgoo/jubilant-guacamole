@@ -5,8 +5,8 @@
         "puppeteer": "^13.4.1"
     },
     "name": "jubilant-guacamole",
-    "version": "1.0.0",
-    "description": "barbars.ru bot",
+    "version": "1.1.0",
+    "description": "Test nodejs multiaccout in-game-bot based on puppetteer module",
     "main": "main.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",

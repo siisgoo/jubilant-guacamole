@@ -3,55 +3,45 @@
         {
             "login": "siisgoo",
             "password": "filso78gpk",
-
             "settings": {
                 "session": {
                     "sessionTime": 3600000,
                     "sessionResumeTime": 1800000
                 },
-
                 "items": {
                     "useBottle": true,
-
                     "breakItems": true,
                     "breakLevel": 5,
                     "breakRarity": "green"
                 },
-
                 "farm": {
                     "objective": "Towers",
-                    "settings":  "Auto"
+                    "settings": "Auto"
                 }
             }
         },
-
         {
             "login": "nexros",
             "password": "53x0n7h3Be@ch",
-
             "settings": {}
         }
     ],
-
     "config": {
         "puppeteer": {
             "headless": false,
             "args": [
-                    "--no-sandbox",
-                    "--disable-setuid-sandbox",
-                    "--disable-dev-shm-usage"
-                ]
+                "--no-sandbox",
+                "--disable-setuid-sandbox",
+                "--disable-dev-shm-usage"
+            ]
         },
-
         "multyAccount": {
             "parallelismPolicy": "Sequential",
             "settings": ""
         },
-
         "log_level": "Trace",
         "log_file": "./log"
     },
-
     "url": {
         "main_menu": "https://barbars.ru/",
         "login": "https://barbars.ru/login",
@@ -62,7 +52,6 @@
             "store": "http://barbars.ru/user/store",
             "resources": "http://barbars.ru/user/resources"
         },
-
         "fight": {
             "towers": "http://barbars.ru/game/towers",
             "ogreDungeon": "http://barbars.ru/game/ogreDungeon",
