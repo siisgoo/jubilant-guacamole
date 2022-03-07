@@ -40,7 +40,7 @@ export class FarmTowers extends EventEmitter implements FarmStrategy {
     // ref
     private bot: HeroBot;
 
-    private sel: Set<puppeteer.ElementHandle<Element>>;
+    private ctx: Set<puppeteer.ElementHandle<Element>>;
 
     private locations:    Map<TowerLocs_t, puppeteer.ElementHandle>;
     private fightButtons: Map<string, puppeteer.ElementHandle>;
@@ -68,7 +68,7 @@ export class FarmTowers extends EventEmitter implements FarmStrategy {
 
             await this.scrapContext();
 
-            if (this.sel.size <= 0) {
+            if (this.ctx.size <= 0) {
                 throw new Error("No nawigation buttions");
             }
 
@@ -108,7 +108,7 @@ export class FarmTowers extends EventEmitter implements FarmStrategy {
             {
                 await this.scrapNearLocations();
 
-                logMessage("Going from capital...");
+                logMessage("Going from capital...\n");
                 await this.goToLocation(this.heroPreferedLocation());
                 return;
             }
@@ -131,7 +131,7 @@ export class FarmTowers extends EventEmitter implements FarmStrategy {
             }
             this.bot.Page.waitForNetworkIdle({timeout: 10000});
 
-            this.sel.clear();
+            this.ctx.clear();
             logMessage("End fight step" + '\n')
 
         } catch (err) {
@@ -143,16 +143,16 @@ export class FarmTowers extends EventEmitter implements FarmStrategy {
     private heroPreferedLocation(): TowerLocs_t {
         let ret: TowerLocs_t;
         const level = this.bot.Level;
+        console.log(level);
 
-        if (level < 8) { ret = TowerLocs[3];
-        } else if (level < 14) { ret = TowerLocs[4];
-        } else if (level < 19) { ret = TowerLocs[5];
-        } else if (level < 25) { ret = TowerLocs[6];
-        } else if (level < 33) { ret = TowerLocs[7];
-        } else if (level < 41) { ret = TowerLocs[8];
-        } else if (level < 51) { ret = TowerLocs[9];
-        } else if (level < 66) { ret = TowerLocs[10];
-        } else if (level < 86) { ret = TowerLocs[11];
+        if (level > 44) { ret = TowerLocs[9];
+        } else if (level > 39) { ret = TowerLocs[8];
+        } else if (level > 30) { ret = TowerLocs[7];
+        } else if (level > 19) { ret = TowerLocs[6];
+        } else if (level > 13) { ret = TowerLocs[5];
+        } else if (level > 8) { ret = TowerLocs[4];
+        } else if (level > 2) { ret = TowerLocs[3];
+        } else if (level > 0) { ret = TowerLocs[2];
         } else {
             throw new Error("Passed level: " + level + " not in avalible range");
         }
@@ -162,19 +162,14 @@ export class FarmTowers extends EventEmitter implements FarmStrategy {
 
     private async scrapContext(): Promise<void> {
         logMessage("Scrumming context");
-        this.sel = new Set(await this.bot.Page.$$('div > a.flhdr'));
-
-        // handle duplicates error
-        // for await (let el of this.sel) {
-        //     if (el.getProperty('innerText') === )
-        // }
+        this.ctx = new Set(await this.bot.Page.$$('div > a.flhdr'));
     }
 
     private async scrapNearLocations(): Promise<void> {
         this.locations.clear();
 
         logMessage("Scrumming nearby locations")
-        for await (let el of this.sel) {
+        for await (let el of this.ctx) {
             let text: string = await el.getProperty('innerText').then(prop => prop.jsonValue());
             if (isTowerLoc(text)) {
                 this.locations.set(text, el);
@@ -199,7 +194,7 @@ export class FarmTowers extends EventEmitter implements FarmStrategy {
         this.fightButtons.clear();
 
         logMessage("Scrum fight buttons")
-        for await (let el of this.sel) {
+        for await (let el of this.ctx) {
             let text: string = await el.getProperty('innerText').then((el) => el.jsonValue());
             if ("Бить врагов" === text) {
                 this.fightButtons.set('Hit', el);
@@ -223,7 +218,7 @@ export class FarmTowers extends EventEmitter implements FarmStrategy {
         let button;
 
         logMessage("Trying use bottle")
-        for await (let el of this.sel) {
+        for await (let el of this.ctx) {
             let text: string = await el.getProperty('innerText') .then((el) => el.jsonValue());
             if (/Пить бутылочку */.test(text)) {
                 let inner = await el.$eval('span', e => e.textContent);
