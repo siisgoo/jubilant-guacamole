@@ -1,5 +1,5 @@
 import * as puppeteer from 'puppeteer'
-import { Item, Rarity } from './items.js';
+import { Item, Rarity, findItems } from './items.js';
 import { logMessage, LoggingLevel, randomizeSleep, sleep } from './utils.js';
 import { ResourceManager } from './resources.js';
 import * as Farm  from './farm.js';
@@ -57,7 +57,7 @@ const DefaulBotSettings: BotSettings = {
         useBottle: true,
         breakItems: true,
         breakLevel: 5,
-        breakRarity: 'cooper',
+        breakRarity: 'common',
     },
 
     farm: {
@@ -163,19 +163,21 @@ export class HeroBot extends EventEmitter {
 
     // Main bot loop
     private async farmLoop(instance: HeroBot, preferedObjective: Farm.FarmStrategy) {
-        await Promise.all([
-            preferedObjective.execute(instance.settings.farm.settings,
-                                      instance.settings.items)
-        ]);
+        await findItems(this.page, this.settings, this.id);
 
-        if (instance.running === true) {
-            instance.farmTimer = await setTimeout(instance.farmLoop,
-                       randomizeSleep(instance.settings.stepInterval, instance.settings.randomize),
-                       instance, preferedObjective);
-        } else {
-            logMessage("Stoping farming");
-            instance.emit('stoped');
-        }
+        // await Promise.all([
+        //     preferedObjective.execute(instance.settings.farm.settings,
+        //                               instance.settings.items)
+        // ]);
+
+        // if (instance.running === true) {
+        //     instance.farmTimer = await setTimeout(instance.farmLoop,
+        //                randomizeSleep(instance.settings.stepInterval, instance.settings.randomize),
+        //                instance, preferedObjective);
+        // } else {
+        //     logMessage("Stoping farming");
+        //     instance.emit('stoped');
+        // }
     }
 
     // first do daliy quests
