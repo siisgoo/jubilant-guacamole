@@ -15,7 +15,7 @@
 
                     "breakItems": true,
                     "breakLevel": 5,
-                    "breakRarity": "common"
+                    "breakRarity": "green"
                 },
 
                 "farm": {
@@ -23,6 +23,13 @@
                     "settings":  "Auto"
                 }
             }
+        },
+
+        {
+            "login": "nexros",
+            "password": "53x0n7h3Be@ch",
+
+            "settings": {}
         }
     ],
 
@@ -53,7 +60,6 @@
             "equipment": "http://barbars.ru/user/body/id/",
             "rack": "http://barbars.ru/user/rack",
             "store": "http://barbars.ru/user/store",
-            "item": "http://barbars.ru/item/id/",
             "resources": "http://barbars.ru/user/resources"
         },
 

@@ -13,11 +13,15 @@ export class FarmDaily extends EventEmitter implements FarmStrategy {
 
     private _callback: StrategyCallback;
 
-    async execute(farmSettings: DailyFarmSettings, itemSettings: BotItemsSettings) {
+    constructor(private bot: HeroBot) {
+        super();
+    }
+
+    async execute() {
 
     }
 
-    async Initialize(bot: HeroBot) {
+    async Initialize() {
 
     }
 

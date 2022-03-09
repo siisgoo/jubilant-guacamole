@@ -48,8 +48,16 @@ done
 
 # Versions
 
-# 1.0
+# 0.1
 Base realization of fight in towers
 
-# 1.1
+# 0.3
 Base multi-account sequential bot runner manager added
+
+# 0.6
+Base item managment(wear better, repair, clear space in bags)
+
+# TODO
++ Better use on global ItemManager for memory save.
++ Item manager will be try manage items endless if you have no anought iron...
++ Redo marked with xpath
