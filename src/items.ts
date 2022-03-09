@@ -98,13 +98,14 @@ export class Item {
         // if (this.durability )
     }
 
+    // repair only equiped items
     async repair(page: page_t) {
         if (!this.inited) {
             throw new Error('Attempt to break uninit Item');
         }
 
-        if (this.durability != 100) {
-            logMessage('Repairing item: ' + JSON.stringify(this))
+        if (this.storeType === 'Equipment' && this.durability != 100) {
+            logMessage('Repairing item: ' + JSON.stringify(this, null, 4))
             await page.goto(this.url, {waitUntil: 'domcontentloaded'});
             await page.$('div.main > div > div > div > a').then(e => SmartClick(e));
         }
@@ -283,11 +284,10 @@ export class ItemManager extends EventEmitter {
         for await (let l_url of [ url.hero.store, url.hero.rack, url.hero.equipment+bot.ID ]) {
             await bot.Page.goto(l_url, {waitUntil: 'domcontentloaded'});
             let idsT = await bot.Page.$$eval('div > table > tbody > tr > td > span > a',
-                                        el => el.map((e) => Number(e.getAttribute('href').slice(11))));
+                                        el => el.map((e) => Number(e.getAttribute('href').match(/\d+$/))));
 
-            // why .filter dont work??
             idsT.forEach(element => {
-                if (element !== null) {
+                if (element != 0) {
                     ids.push(element);
                 }
             });
@@ -313,5 +313,6 @@ export class ItemManager extends EventEmitter {
             process.stdout.write('\r')
             pbar.tick(1);
         }
+
     }
 }

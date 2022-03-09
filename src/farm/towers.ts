@@ -36,9 +36,6 @@ let isTowerLoc = (locStr: string) => TowerLocs.some(elem => elem === locStr);
  */
 export class FarmTowers extends EventEmitter implements FarmStrategy {
 
-    // ref
-    private bot: HeroBot;
-
     // page context
     private ctx: Set<puppeteer.ElementHandle<Element>>;
 
@@ -50,68 +47,62 @@ export class FarmTowers extends EventEmitter implements FarmStrategy {
 
     // callback to farm
     // private _callback: StrategyCallback = async (bot: HeroBot) => { await bot.Page.goto(url.fight.towers, { waitUntil: 'domcontentloaded' }) };
-    private _callback: StrategyCallback = async (bot: HeroBot) => { await this.Initialize(bot); };
+    private _callback: StrategyCallback = async () => { await this.Initialize(); };
 
     get callback(): StrategyCallback { return this._callback; }
 
-    constructor() {
+    // bot - ref to real
+    constructor(private bot: HeroBot) {
         super();
         this.locations = new Map;
         this.fightButtons = new Map;
     }
 
-    async Initialize(bot: HeroBot) {
-        this.bot = bot;
-        await bot.Page.goto(url.fight.towers, {waitUntil: 'domcontentloaded'});
+    async Initialize() {
+        await this.bot.Page.goto(url.fight.towers, {waitUntil: 'domcontentloaded'});
         await this.bot.Page.waitForSelector('div > a', { timeout: 10000, visible: true });
     }
 
-    private async prepareExecute() {
+    // its a first step always false
+    private async prepareExecute(): Promise<boolean> {
         this.ctx = new Set(await this.bot.Page.$$('div > a.flhdr'));
 
         if (this.ctx.size <= 0) {
             throw new Error("No nawigation buttions");
         }
 
+        return false;
     }
 
+    // no matter return
     private async finalizeExecute() {
         this.ctx.clear();
     }
 
-    async execute()
-    {
-
+    async execute(): Promise<void> {
         try {
+            const steps = [ this.prepareExecute,
+                            this.checkBag,
+                            this.checkStats,
+                            this.leaveCapital,
+                            this.fight,
+                            this.finalizeExecute ];
 
-            await this.prepareExecute();
-
-            if (await this.checkBag()) {
-                this.finalizeExecute();
-                return;
+            for await (let step of steps) {
+                if (await step.call(this)) {
+                    this.finalizeExecute();
+                    return;
+                }
             }
-
-            if (await this.checkStats()) {
-                this.finalizeExecute();
-                return;
-            }
-
-            if (await this.leaveCapital()) {
-                this.finalizeExecute();
-                return;
-            }
-
-            await this.fight();
-
-            await this.finalizeExecute();
 
         } catch (err) {
             logMessage(err, LoggingLevel.Fatal);
-            throw new Error("Error occured while fighting: " + err);
+            throw new Error("Error occured while farming: " + err);
         }
     }
 
-    private async fight() {
+    // its a final step, always return true
+    private async fight(): Promise<boolean> {
         await this.scrapFightButtons();
 
         // redo with better pattern
@@ -129,6 +120,8 @@ export class FarmTowers extends EventEmitter implements FarmStrategy {
             await SmartClick(this.fightButtons.get('Hit'))
         }
         // this.bot.Page.waitForNetworkIdle({timeout: 10000});
+
+        return true;
     }
 
     private async checkBag(): Promise<boolean> {
@@ -202,7 +195,6 @@ export class FarmTowers extends EventEmitter implements FarmStrategy {
     private heroPreferedLocation(): TowerLocs_t {
         let ret: TowerLocs_t;
         const level = this.bot.Level;
-        console.log(level);
 
         if (level > 44) { ret = TowerLocs[9];
         } else if (level > 39) { ret = TowerLocs[8];

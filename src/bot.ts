@@ -1,9 +1,12 @@
 import * as puppeteer from 'puppeteer'
-import { Item, Rarity, ItemManager } from './items.js';
-import { logMessage, LoggingLevel, randomizeSleep, sleep } from './utils.js';
-import { ResourceManager } from './resources.js';
-import * as Farm  from './farm.js';
 import { EventEmitter } from 'events';
+import { logMessage, LoggingLevel, randomizeSleep, sleep } from './utils.js';
+
+import { Item, Rarity, ItemManager } from './items.js';
+import { ResourceManager } from './resources.js';
+import { FarmStrategy, FarmStrategyFactory, AvalibleStrategy_t, FarmSettings } from './farm.js';
+import { FarmTowers } from './farm/towers.js'
+import { FarmDaily } from './farm/daily.js'
 
 import { url } from "./config.json";
 
@@ -31,8 +34,8 @@ export interface BotItemsSettings {
 }
 
 interface BotFarmSettings {
-    objective: Farm.AvalibleStrategy_t;
-    settings: Farm.FarmSettings;
+    objective: AvalibleStrategy_t;
+    settings: FarmSettings;
 }
 
 export interface BotSettings {
@@ -99,7 +102,7 @@ export class HeroBot extends EventEmitter {
     private armor:        number;
     private summary:      number;
 
-    public strategy: Farm.AvalibleStrategy_t;
+    public strategy: AvalibleStrategy_t;
 
     private resetTimer: NodeJS.Timeout;
     private farmTimer: NodeJS.Timeout;
@@ -127,8 +130,8 @@ export class HeroBot extends EventEmitter {
         this.resources = new ResourceManager;
         this.items = new ItemManager;
 
-        this.sessionTimer = setTimeout(this.onSessionRunout,
-                                       this.settings.session.sessionTime);
+        // this.sessionTimer = setTimeout(this.onSessionRunout,
+        //                                this.settings.session.sessionTime);
 
         this.Init();
     }
@@ -156,21 +159,21 @@ export class HeroBot extends EventEmitter {
         this.doLogin();
     }
 
-    private async onSessionRunout() {
-        this.emit('SessionRunOut')
-        this.Stop();
-        this.Dispose();
-        this.sessionResumeTimer = setTimeout(() =>
-            {
-                this.Init();
-                this.once('ready', this.Run);
-                this.emit('SessionResumed')
-            },
-            this.settings.session.sessionResumeTime);
-    }
+    // private async onSessionRunout() {
+    //     this.emit('SessionRunOut')
+    //     this.Stop();
+    //     this.Dispose();
+    //     this.sessionResumeTimer = setTimeout(() =>
+    //         {
+    //             this.Init();
+    //             this.once('ready', this.Run);
+    //             this.emit('SessionResumed')
+    //         },
+    //         this.settings.session.sessionResumeTime);
+    // }
 
     // Main bot loop
-    private async farmLoop(instance: HeroBot, preferedObjective: Farm.FarmStrategy) {
+    private async farmLoop(instance: HeroBot, preferedObjective: FarmStrategy) {
         await Promise.all([
             preferedObjective.execute()
         ]);
@@ -201,12 +204,12 @@ export class HeroBot extends EventEmitter {
         this.running = true;
         this.emit('started');
 
-        let obj = Farm.Strategies.get(this.settings.farm.objective)
-        await obj.Initialize(this);
+        let obj = FarmStrategyFactory(this.settings.farm.objective, this);
+        await obj.Initialize();
 
         // obj.on('DailyRunOut', () => 0);
 
-        obj.on('NeedRest', (farmObj: Farm.FarmStrategy) =>
+        obj.on('NeedRest', (farmObj: FarmStrategy) =>
             {
                 this.Stop();
 
@@ -224,7 +227,7 @@ export class HeroBot extends EventEmitter {
 
                     this.emit('Resting');
                     this.resetTimer = setTimeout(() => {
-                        farmObj.callback(this).then(() => {
+                        farmObj.callback().then(() => {
                             this.running = true;
                             this.emit('started');
                             this.farmLoop(this, farmObj); // start
@@ -235,13 +238,13 @@ export class HeroBot extends EventEmitter {
             }
         );
 
-        obj.on('ItemBroken', (farmObj: Farm.FarmStrategy) => {
+        obj.on('ItemBroken', (farmObj: FarmStrategy) => {
             this.Stop();
             this.once('stoped', async () => {
                 await this.items.clear();
                 await this.items.scrap(this);
                 await this.items.repair(this);
-                farmObj.callback(this).then(() => {
+                farmObj.callback().then(() => {
                     this.running = true;
                     this.emit('started');
                     this.farmLoop(this, farmObj); // start
@@ -249,13 +252,13 @@ export class HeroBot extends EventEmitter {
             })
         });
 
-        obj.on('RackFull', (farmObj: Farm.FarmStrategy) => {
+        obj.on('RackFull', (farmObj: FarmStrategy) => {
             this.Stop();
             this.once('stoped', async () => {
                 this.items.clear();
                 await this.items.scrap(this);
                 await this.items.clearSpace(this);
-                farmObj.callback(this).then(() => {
+                farmObj.callback().then(() => {
                     this.running = true;
                     this.emit('started');
                     this.farmLoop(this, farmObj); // start
@@ -263,13 +266,13 @@ export class HeroBot extends EventEmitter {
             })
         });
 
-        obj.on('RackBetter', (farmObj: Farm.FarmStrategy) => {
+        obj.on('RackBetter', (farmObj: FarmStrategy) => {
             this.Stop();
             this.once('stoped', async () => {
                 this.items.clear();
                 await this.items.scrap(this);
                 await this.items.wearBetter(this);
-                farmObj.callback(this).then(() => {
+                farmObj.callback().then(() => {
                     this.running = true;
                     this.emit('started');
                     this.farmLoop(this, farmObj); // start
@@ -317,8 +320,12 @@ export class HeroBot extends EventEmitter {
             await this.page.content();
 
             // id
-            let target = await this.page.$$eval('a', (href) => href[0].toString());
-            this.id = Number(new URL(target).pathname.split('/')[3]);
+            let target = await this.page.$$eval('a', (href) => href.map(e => e.getAttribute('href')));
+            target.forEach(e => {
+                if (e.match('user/achivements/0/')) {
+                    this.id = Number(e.match(/\d+$/));
+                }
+            })
 
             // hero stats
             let statSpans: number[] = await this.page.$$eval('div > span[class=""]', (el) =>
