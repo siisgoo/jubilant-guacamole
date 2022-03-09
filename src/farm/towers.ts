@@ -27,6 +27,8 @@ const TowerLocs: Array<string> =
 type TowerLocs_t = typeof TowerLocs[number];
 let isTowerLoc = (locStr: string) => TowerLocs.some(elem => elem === locStr);
 
+// redo with one sinal about items stats and pass situation as argument
+// lets save 10 lines of code)))
 /**
  * Signals:
  *  NeedRest - on energy or health is zero
@@ -58,27 +60,7 @@ export class FarmTowers extends EventEmitter implements FarmStrategy {
         this.fightButtons = new Map;
     }
 
-    async Initialize() {
-        await this.bot.Page.goto(url.fight.towers, {waitUntil: 'domcontentloaded'});
-        await this.bot.Page.waitForSelector('div > a', { timeout: 10000, visible: true });
-    }
-
-    // its a first step always false
-    private async prepareExecute(): Promise<boolean> {
-        this.ctx = new Set(await this.bot.Page.$$('div > a.flhdr'));
-
-        if (this.ctx.size <= 0) {
-            throw new Error("No nawigation buttions");
-        }
-
-        return false;
-    }
-
-    // no matter return
-    private async finalizeExecute() {
-        this.ctx.clear();
-    }
-
+    // Main function to farm
     async execute(): Promise<void> {
         try {
             const steps = [ this.prepareExecute,
@@ -99,6 +81,27 @@ export class FarmTowers extends EventEmitter implements FarmStrategy {
             logMessage(err, LoggingLevel.Fatal);
             throw new Error("Error occured while farming: " + err);
         }
+    }
+
+    async Initialize(): Promise<void> {
+        await this.bot.Page.goto(url.fight.towers, {waitUntil: 'domcontentloaded'});
+        await this.bot.Page.waitForSelector('div > a', { timeout: 10000, visible: true });
+    }
+
+    // its a first step always false
+    private async prepareExecute(): Promise<boolean> {
+        this.ctx = new Set(await this.bot.Page.$$('div > a.flhdr'));
+
+        if (this.ctx.size <= 0) {
+            throw new Error("No nawigation buttions");
+        }
+
+        return false;
+    }
+
+    // no matter return
+    private async finalizeExecute() {
+        this.ctx.clear();
     }
 
     // its a final step, always return true
