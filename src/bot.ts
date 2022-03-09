@@ -1,5 +1,5 @@
 import * as puppeteer from 'puppeteer'
-import { Item, Rarity, findItems } from './items.js';
+import { Item, Rarity, ItemManager } from './items.js';
 import { logMessage, LoggingLevel, randomizeSleep, sleep } from './utils.js';
 import { ResourceManager } from './resources.js';
 import * as Farm  from './farm.js';
@@ -89,6 +89,7 @@ export class HeroBot extends EventEmitter {
     private heroClass:    HeroClass;
 
     private resources:    ResourceManager;
+    private items:        ItemManager;
     private id:           number;
     private level:        number;
     private strength:     number;
@@ -106,9 +107,11 @@ export class HeroBot extends EventEmitter {
     private sessionTimer: NodeJS.Timeout;
     private sessionResumeTimer: NodeJS.Timeout;
 
+    get Settings()     { return this.settings; }
     get Page()         { return this.page; }
     get ConflictSide() { return this.conflictSide; }
     get Level()        { return this.level; }
+    get ID()           { return this.id; }
     get Resources()    { return this.resources; }
 
     constructor(private page: puppeteer.Page,
@@ -120,6 +123,9 @@ export class HeroBot extends EventEmitter {
         this.running = false;
         this.inited = false;
         this.settings = { ...DefaulBotSettings, ...l_settings };
+
+        this.resources = new ResourceManager;
+        this.items = new ItemManager;
 
         this.sessionTimer = setTimeout(this.onSessionRunout,
                                        this.settings.session.sessionTime);
@@ -151,33 +157,32 @@ export class HeroBot extends EventEmitter {
     }
 
     private async onSessionRunout() {
+        this.emit('SessionRunOut')
         this.Stop();
         this.Dispose();
         this.sessionResumeTimer = setTimeout(() =>
             {
                 this.Init();
                 this.once('ready', this.Run);
+                this.emit('SessionResumed')
             },
             this.settings.session.sessionResumeTime);
     }
 
     // Main bot loop
     private async farmLoop(instance: HeroBot, preferedObjective: Farm.FarmStrategy) {
-        await findItems(this.page, this.settings, this.id);
+        await Promise.all([
+            preferedObjective.execute()
+        ]);
 
-        // await Promise.all([
-        //     preferedObjective.execute(instance.settings.farm.settings,
-        //                               instance.settings.items)
-        // ]);
-
-        // if (instance.running === true) {
-        //     instance.farmTimer = await setTimeout(instance.farmLoop,
-        //                randomizeSleep(instance.settings.stepInterval, instance.settings.randomize),
-        //                instance, preferedObjective);
-        // } else {
-        //     logMessage("Stoping farming");
-        //     instance.emit('stoped');
-        // }
+        if (instance.running === true) {
+            instance.farmTimer = await setTimeout(instance.farmLoop,
+                       randomizeSleep(instance.settings.stepInterval, instance.settings.randomize),
+                       instance, preferedObjective);
+        } else {
+            logMessage("Stoping farming");
+            instance.emit('stoped');
+        }
     }
 
     // first do daliy quests
@@ -198,6 +203,8 @@ export class HeroBot extends EventEmitter {
 
         let obj = Farm.Strategies.get(this.settings.farm.objective)
         await obj.Initialize(this);
+
+        // obj.on('DailyRunOut', () => 0);
 
         obj.on('NeedRest', (farmObj: Farm.FarmStrategy) =>
             {
@@ -228,7 +235,47 @@ export class HeroBot extends EventEmitter {
             }
         );
 
-        // obj.on('DailyRunOut', () => 0);
+        obj.on('ItemBroken', (farmObj: Farm.FarmStrategy) => {
+            this.Stop();
+            this.once('stoped', async () => {
+                await this.items.clear();
+                await this.items.scrap(this);
+                await this.items.repair(this);
+                farmObj.callback(this).then(() => {
+                    this.running = true;
+                    this.emit('started');
+                    this.farmLoop(this, farmObj); // start
+                })
+            })
+        });
+
+        obj.on('RackFull', (farmObj: Farm.FarmStrategy) => {
+            this.Stop();
+            this.once('stoped', async () => {
+                this.items.clear();
+                await this.items.scrap(this);
+                await this.items.clearSpace(this);
+                farmObj.callback(this).then(() => {
+                    this.running = true;
+                    this.emit('started');
+                    this.farmLoop(this, farmObj); // start
+                })
+            })
+        });
+
+        obj.on('RackBetter', (farmObj: Farm.FarmStrategy) => {
+            this.Stop();
+            this.once('stoped', async () => {
+                this.items.clear();
+                await this.items.scrap(this);
+                await this.items.wearBetter(this);
+                farmObj.callback(this).then(() => {
+                    this.running = true;
+                    this.emit('started');
+                    this.farmLoop(this, farmObj); // start
+                })
+            })
+        });
 
         try {
             this.farmLoop(this, obj);

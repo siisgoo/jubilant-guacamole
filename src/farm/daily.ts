@@ -13,7 +13,7 @@ export class FarmDaily extends EventEmitter implements FarmStrategy {
 
     private _callback: StrategyCallback;
 
-    async execute(farmSettings: DailyFarmSettings, itemSettings: BotItemsSettings) {
+    async execute() {
 
     }
 

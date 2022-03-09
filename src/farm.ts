@@ -18,8 +18,10 @@ export type FarmSettings       = TowersFarmSettings | DailyFarmSettings;
 
 export interface StrategyCallback { (bot: HeroBot): Promise<void> };
 
+export type FightButton_t = 'Berserk' | 'HitTower' | 'FinishOff' | 'Hit';
+
 export interface FarmStrategy extends EventEmitter {
-    execute(farmSettings: FarmSettings, itemSettings: BotItemsSettings);
+    execute();
     Initialize(bot: HeroBot);
     get callback(): StrategyCallback;
 };

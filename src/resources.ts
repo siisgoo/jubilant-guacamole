@@ -32,18 +32,17 @@ export class ResourceManager {
         await page.goto(url.main_menu);// handle exit from battle
         await page.goto(url.hero.resources, { waitUntil: 'domcontentloaded' });
 
-        let sel = await page.$$('div > span');
+        await page.$$eval('div > span', e => e.map(el => Number(el.textContent)))
+        .then(sel => {
+            this.bottles = sel[0];
+            this.iron    = sel[1];
+            this.mithril = sel[2];
 
-        // remove stats
-        sel.splice(0, 1);
+            this.arenaPoints  = sel[3];
+            this.fieldsPoints = sel[5];
+            this.talentPoints = sel[6];
+        });
 
-        this.bottles = await sel[0].jsonValue();
-        this.iron    = await sel[1].jsonValue();
-        this.mithril = await sel[2].jsonValue();
-
-        this.arenaPoints  = await sel[3].jsonValue();
-        this.fieldsPoints = await sel[4].jsonValue();
-        this.talentPoints = await sel[5].jsonValue();
 
         await page.goto(url.hero.main, { waitUntil: 'domcontentloaded' });
 

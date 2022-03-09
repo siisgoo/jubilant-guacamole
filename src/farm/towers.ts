@@ -1,5 +1,5 @@
 import * as puppeteer from 'puppeteer';
-import { FarmStrategy, TowersFarmSettings, StrategyCallback }  from './../farm.js';
+import { FarmStrategy, TowersFarmSettings, StrategyCallback, FightButton_t }  from './../farm.js';
 import { EventEmitter } from 'events';
 import { HeroBot, BotItemsSettings } from './../bot.js';
 import { SmartClick, logMessage, LoggingLevel, sleep } from './../utils.js';
@@ -31,7 +31,6 @@ let isTowerLoc = (locStr: string) => TowerLocs.some(elem => elem === locStr);
  * Signals:
  *  NeedRest - on energy or health is zero
  *  ItemBroken - on some item has been broken
- *  NewItem - on new item collected
  *  RackFull - on rack is full
  *  RackBetter - collected item is better then weared
  */
@@ -40,103 +39,163 @@ export class FarmTowers extends EventEmitter implements FarmStrategy {
     // ref
     private bot: HeroBot;
 
+    // page context
     private ctx: Set<puppeteer.ElementHandle<Element>>;
 
+    // near locations [name: handler]
     private locations:    Map<TowerLocs_t, puppeteer.ElementHandle>;
-    private fightButtons: Map<string, puppeteer.ElementHandle>;
-    private _callback: StrategyCallback = async (bot: HeroBot) => { await bot.Page.goto(url.fight.towers, { waitUntil: 'domcontentloaded' }) };
+
+    // fight buttons [name: handler]
+    private fightButtons: Map<FightButton_t, puppeteer.ElementHandle>;
+
+    // callback to farm
+    // private _callback: StrategyCallback = async (bot: HeroBot) => { await bot.Page.goto(url.fight.towers, { waitUntil: 'domcontentloaded' }) };
+    private _callback: StrategyCallback = async (bot: HeroBot) => { await this.Initialize(bot); };
 
     get callback(): StrategyCallback { return this._callback; }
+
+    constructor() {
+        super();
+        this.locations = new Map;
+        this.fightButtons = new Map;
+    }
 
     async Initialize(bot: HeroBot) {
         this.bot = bot;
         await bot.Page.goto(url.fight.towers, {waitUntil: 'domcontentloaded'});
         await this.bot.Page.waitForSelector('div > a', { timeout: 10000, visible: true });
-        this.locations = new Map;
-        this.fightButtons = new Map;
     }
 
-    async execute(settings: TowersFarmSettings, itemSettings: BotItemsSettings )
+    private async prepareExecute() {
+        this.ctx = new Set(await this.bot.Page.$$('div > a.flhdr'));
+
+        if (this.ctx.size <= 0) {
+            throw new Error("No nawigation buttions");
+        }
+
+    }
+
+    private async finalizeExecute() {
+        this.ctx.clear();
+    }
+
+    async execute()
     {
 
         try {
 
-            logMessage("Start fight step")
+            await this.prepareExecute();
 
-            let stats = await this.bot.scrapCurentHeroStats();
-            logMessage(JSON.stringify(stats));
-
-            await this.scrapContext();
-
-            if (this.ctx.size <= 0) {
-                throw new Error("No nawigation buttions");
-            }
-
-            // let indicators = await this.bot.Page.$$('a > img');
-            // for await (let ind of indicators) {
-            //     let src = await ind.getProperty('src').then(e => e.jsonValue());
-
-            //     if (src == "/images/icons/bag_better.gif") {
-            //         this.emit('RackBetter');
-            //     }
-            // }
-
-            if (stats.energy === 0 || stats.health === 0) {
-                logMessage("Low health or energy", LoggingLevel.Trace);
-
-                // use bottle
-                if (itemSettings.useBottle === true && (await this.useBottle())) {
-                    logMessage("Exiging farm for healing");
-                    return; //exit for new iteration
-                } else { // go rest
-                    logMessage("Health is low, resting...");
-
-                    this.emit('NeedRest',
-                              this);
-
-                    return; // reload
-                }
-
-            }
-
-            let currentLocation: TowerLocs_t =
-                await this.bot.Page.$eval('div > h1 > span', (el) => <TowerLocs_t> el.textContent);
-
-            // if in started location
-            if (currentLocation === "Карaкорум, стoлицa Юга"
-                || currentLocation === "столица г. Мидгард")
-            {
-                await this.scrapNearLocations();
-
-                logMessage("Going from capital...\n");
-                await this.goToLocation(this.heroPreferedLocation());
+            if (await this.checkBag()) {
+                this.finalizeExecute();
                 return;
             }
 
-            await this.scrapFightButtons();
-
-            // redo with better pattern
-            if (this.fightButtons.has('Berserk')) {
-                logMessage("Activating berserk ability...");
-                await SmartClick(this.fightButtons.get('Berserk'));
-            } else if (this.fightButtons.has('HitTower')) {
-                logMessage("Hitting tower...");
-                await SmartClick(this.fightButtons.get('HitTower'));
-            } else if (this.fightButtons.has('FinishOff')) {
-                logMessage("Hitting enemy...");
-                await SmartClick(this.fightButtons.get('FinishOff'));
-            } else if (this.fightButtons.has('Hit')) {
-                logMessage("Hitting...");
-                await SmartClick(this.fightButtons.get('Hit'))
+            if (await this.checkStats()) {
+                this.finalizeExecute();
+                return;
             }
-            this.bot.Page.waitForNetworkIdle({timeout: 10000});
 
-            this.ctx.clear();
-            logMessage("End fight step" + '\n')
+            if (await this.leaveCapital()) {
+                this.finalizeExecute();
+                return;
+            }
+
+            await this.fight();
+
+            await this.finalizeExecute();
 
         } catch (err) {
             logMessage(err, LoggingLevel.Fatal);
             throw new Error("Error occured while fighting: " + err);
+        }
+    }
+
+    private async fight() {
+        await this.scrapFightButtons();
+
+        // redo with better pattern
+        if (this.fightButtons.has('Berserk')) {
+            logMessage("Activating berserk ability...");
+            await SmartClick(this.fightButtons.get('Berserk'));
+        } else if (this.fightButtons.has('HitTower')) {
+            logMessage("Hitting tower...");
+            await SmartClick(this.fightButtons.get('HitTower'));
+        } else if (this.fightButtons.has('FinishOff')) {
+            logMessage("Hitting enemy...");
+            await SmartClick(this.fightButtons.get('FinishOff'));
+        } else if (this.fightButtons.has('Hit')) {
+            logMessage("Hitting...");
+            await SmartClick(this.fightButtons.get('Hit'))
+        }
+        // this.bot.Page.waitForNetworkIdle({timeout: 10000});
+    }
+
+    private async checkBag(): Promise<boolean> {
+        let indicators = await this.bot.Page.$$('a > img');
+
+        for await (let ind of indicators) {
+            let src = await ind.getProperty('src').then(e => e.jsonValue());
+
+            switch (src) {
+                case 'http://barbars.ru/images/icons/bag_better.gif':
+                    logMessage('Founed better item');
+                    await this.emit('RackBetter', this);
+                    return true;
+                    break;
+                case 'http://barbars.ru/images/icons/clothes_broken.gif':
+                    logMessage('One item was broken');
+                    await this.emit('ItemBroken', this);
+                    return true;
+                    break;
+                case 'http://barbars.ru/images/icons/bag_full.gif':
+                    logMessage('Rack is full');
+                    await this.emit('RackFull', this);
+                    return true;
+                    break;
+            }
+        }
+        return false;
+    }
+
+    // return true on need refresh
+    private async checkStats(): Promise<boolean> {
+        let stats = await this.bot.scrapCurentHeroStats();
+        if (stats.energy === 0 || stats.health === 0) {
+            logMessage("Low health or energy", LoggingLevel.Trace);
+
+            if (this.bot.Settings.items.useBottle && (await this.useBottle())) {
+                logMessage("Exiting farm for healing");
+                return true;
+            } else {
+                logMessage("Health is low, resting...");
+                this.emit('NeedRest', this);
+                return true;
+            }
+
+        } else {
+            return false;
+        }
+    }
+
+    private async isOnCapaital(): Promise<boolean> {
+        let loc: TowerLocs_t =
+            await this.bot.Page.$eval('div > h1 > span', (el) => <TowerLocs_t> el.textContent);
+
+        if (loc === "Карaкорум, стoлицa Юга" || loc === "столица г. Мидгард") {
+            return true;
+        }
+        return false;
+    }
+
+    // return true if need refresh
+    private async leaveCapital(): Promise<boolean> {
+        if (await this.isOnCapaital()) {
+            await this.scrapNearLocations();
+            await this.goToLocation(this.heroPreferedLocation());
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -160,15 +219,9 @@ export class FarmTowers extends EventEmitter implements FarmStrategy {
         return ret;
     }
 
-    private async scrapContext(): Promise<void> {
-        logMessage("Scrumming context");
-        this.ctx = new Set(await this.bot.Page.$$('div > a.flhdr'));
-    }
-
     private async scrapNearLocations(): Promise<void> {
         this.locations.clear();
 
-        logMessage("Scrumming nearby locations")
         for await (let el of this.ctx) {
             let text: string = await el.getProperty('innerText').then(prop => prop.jsonValue());
             if (isTowerLoc(text)) {
@@ -179,11 +232,8 @@ export class FarmTowers extends EventEmitter implements FarmStrategy {
 
     private async goToLocation(loc: TowerLocs_t): Promise<void> {
         if (this.locations.has(loc) === false) {
-            // programming error
             throw new Error("Cannot go to location");
         }
-
-        let page = this.bot.Page;
 
         logMessage("Going to other location")
         await SmartClick(this.locations.get(loc));
@@ -193,7 +243,6 @@ export class FarmTowers extends EventEmitter implements FarmStrategy {
     private async scrapFightButtons(): Promise<void> {
         this.fightButtons.clear();
 
-        logMessage("Scrum fight buttons")
         for await (let el of this.ctx) {
             let text: string = await el.getProperty('innerText').then((el) => el.jsonValue());
             if ("Бить врагов" === text) {
